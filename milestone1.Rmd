@@ -1,0 +1,21 @@
+---
+title: "milestone1"
+author: "Marion Nyberg, Rachel Han"
+date: "28/02/2020"
+output: html_document
+---
+
+### Introduction
+
+
+### Data Description
+
+
+### Exploring the Dataset
+
+
+### Research Question
+
+
+
+
