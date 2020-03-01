@@ -18,6 +18,8 @@ The [dataset](https://www.kaggle.com/datasnaek/youtube-new) `Trending YouTube Vi
 
 There are 10 datasets presented specific to the following countries: USA, Great Britain, Germany, Canada, France, Russia, Mexico, South Korea, Japan and India. We choose the Canada dataset to explore. The dataset contains rows of trending videos which include features like category, tags, number of views, likes, dislikes and shares.
 
+
+
 ```{r}
 # read Canada dataset csv file
 CAN <- read.csv(file = 'data/CAvideos.csv')
@@ -50,3 +52,25 @@ ggplot(CAN, aes(views, likes)) +
 ```
 
 
+Mean views, likes, dislikes and comment counts for each channel
+```{r}
+Channel_means <- CAN %>%
+  select(channel_title, views, likes, dislikes, comment_count) %>%
+  group_by(channel_title) %>%
+  summarise(mean_views = mean(views),
+            mean_likes = mean(likes),
+            mean_dislikes = mean(dislikes),
+            mean_comments = mean(comment_count))
+kable(Channel_means)
+
+ggplot(Channel_means, aes(mean_likes, mean_views))+
+  geom_point()
+```
+
+# Research question
+What are the trends between comment count and video likes/dislikes?
+
+What are the trends between views per video and likes/dislikes?
+
+
+# Plan of action
