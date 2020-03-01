@@ -1,6 +1,52 @@
 ---
-title: "milestone1_547"
+title: "Dataset, EDA and research question"
 author: "Marion Nyberg & Rachel Han"
 date: "28/02/2020"
 output: html_document
 ---
+```{r, echo=FALSE, warning=FALSE,include=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(knitr)
+library(DT)
+library(rmarkdown)
+library(plotly)
+```
+
+# Data Description
+The [dataset](https://www.kaggle.com/datasnaek/youtube-new) `Trending YouTube Video Statistics' is put together by [Mitchell Jolly](https://mitchelljolly.com/) from YouTube API, which was last updated on 2019-06-02. The scripts that scraped the data from YouTube API can be found [here](https://github.com/mitchelljy/Trending-YouTube-Scraper). 
+
+There are 10 datasets presented specific to the following countries: USA, Great Britain, Germany, Canada, France, Russia, Mexico, South Korea, Japan and India. We choose the Canada dataset to explore. The dataset contains rows of trending videos which include features like category, tags, number of views, likes, dislikes and shares.
+
+```{r}
+# read Canada dataset csv file
+CAN <- read.csv(file = 'data/CAvideos.csv')
+```
+
+# EDA
+
+In this dataset, there are 40881 observations and 16 features.
+```{r}
+nrow(CAN)
+ncol(CAN)
+```
+
+
+```{r show-tibble}
+features <- CAN %>% colnames() %>% as_tibble()
+types <- CAN %>% sapply(class) %>% as_tibble()
+feature_type <- cbind(features,types)
+colnames(feature_type)<-c("Features","Type")
+kable(feature_type)
+```
+
+
+Plot of trend between likes and views
+```{r}
+ggplot(CAN, aes(views, likes)) +
+  geom_point() + 
+  labs(x = "Views", y = "Likes") +
+  theme_bw()
+```
+
+
