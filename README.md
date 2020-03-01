@@ -2,4 +2,4 @@
 Rachel Han & Marion Nyberg 
 
 ## Dataset
-Our dataset is (Daily trending videos on YouTube)[https://www.kaggle.com/datasnaek/youtube-new].
+Our dataset is [Daily trending videos on YouTube](https://www.kaggle.com/datasnaek/youtube-new).
