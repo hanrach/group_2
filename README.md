@@ -5,4 +5,4 @@ Rachel Han & Marion Nyberg
 Our dataset is [Daily trending videos on YouTube](https://www.kaggle.com/datasnaek/youtube-new).
 
 Milestones
-- [Dataset, EDA and research question](https://hanrach.github.io/group_2/master/milestone1_547.html)
+- [Dataset, EDA and research question](https://hanrach.github.io/group_2/milestone1_547.html)
