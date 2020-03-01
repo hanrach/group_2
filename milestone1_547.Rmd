@@ -19,7 +19,7 @@ There are 10 datasets presented specific to the following countries: USA, Great 
 
 ```{r}
 # read Canada dataset csv file
-CAN <- read.csv(file = 'data/CAvideos.csv')
+#CAN <- read.csv(file = 'data/CAvideos.csv')
 ```
 
 In this dataset, there are 40881 observations and 16 features.
