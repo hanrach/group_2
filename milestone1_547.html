@@ -372,64 +372,92 @@ summary {
 <div id="data-description" class="section level1">
 <h1>Data Description</h1>
 <p>The <a href="https://www.kaggle.com/datasnaek/youtube-new">dataset</a> `Trending YouTube Video Statistics’ is put together by <a href="https://mitchelljolly.com/">Mitchell Jolly</a> from YouTube API, which was last updated on 2019-06-02. The scripts that scraped the data from YouTube API can be found <a href="https://github.com/mitchelljy/Trending-YouTube-Scraper">here</a>.</p>
-<p>There are 10 datasets presented specific to the following countries: USA, Great Britain, Germany, Canada, France, Russia, Mexico, South Korea, Japan and India. We choose the Canada dataset to explore. The dataset contains rows of trending videos which include features like the category, tags, number of views, likes, dislikes and shares. One could use this dataset to explore what kinds features of a video make it a trending video, for commercial reasons or for fun.</p>
+<p>There are 10 datasets presented specific to the following countries: USA, Great Britain, Germany, Canada, France, Russia, Mexico, South Korea, Japan and India. We choose the Canada dataset to explore. The dataset contains rows of trending videos which include features like category, tags, number of views, likes, dislikes and shares.</p>
 <pre class="r"><code># read Canada dataset csv file
 CAN &lt;- read.csv(file = 'data/CAvideos.csv')</code></pre>
-<pre class="r"><code>kable(colnames(CAN))</code></pre>
+<p>In this dataset, there are 40881 observations and 16 features.</p>
+<pre class="r"><code>nrow(CAN)</code></pre>
+<pre><code>## [1] 40881</code></pre>
+<pre class="r"><code>ncol(CAN)</code></pre>
+<pre><code>## [1] 16</code></pre>
+<pre class="r"><code>features &lt;- CAN %&gt;% colnames() %&gt;% as_tibble()</code></pre>
+<pre><code>## Warning: Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `tibble::enframe(name = NULL)` instead.
+## This warning is displayed once per session.</code></pre>
+<pre class="r"><code>types &lt;- CAN %&gt;% sapply(class) %&gt;% as_tibble()
+feature_type &lt;- cbind(features,types)
+colnames(feature_type)&lt;-c(&quot;Features&quot;,&quot;Type&quot;)
+kable(feature_type)</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th align="left">x</th>
+<th align="left">Features</th>
+<th align="left">Type</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left">video_id</td>
+<td align="left">factor</td>
 </tr>
 <tr class="even">
 <td align="left">trending_date</td>
+<td align="left">factor</td>
 </tr>
 <tr class="odd">
 <td align="left">title</td>
+<td align="left">factor</td>
 </tr>
 <tr class="even">
 <td align="left">channel_title</td>
+<td align="left">factor</td>
 </tr>
 <tr class="odd">
 <td align="left">category_id</td>
+<td align="left">integer</td>
 </tr>
 <tr class="even">
 <td align="left">publish_time</td>
+<td align="left">factor</td>
 </tr>
 <tr class="odd">
 <td align="left">tags</td>
+<td align="left">factor</td>
 </tr>
 <tr class="even">
 <td align="left">views</td>
+<td align="left">integer</td>
 </tr>
 <tr class="odd">
 <td align="left">likes</td>
+<td align="left">integer</td>
 </tr>
 <tr class="even">
 <td align="left">dislikes</td>
+<td align="left">integer</td>
 </tr>
 <tr class="odd">
 <td align="left">comment_count</td>
+<td align="left">integer</td>
 </tr>
 <tr class="even">
 <td align="left">thumbnail_link</td>
+<td align="left">factor</td>
 </tr>
 <tr class="odd">
 <td align="left">comments_disabled</td>
+<td align="left">factor</td>
 </tr>
 <tr class="even">
 <td align="left">ratings_disabled</td>
+<td align="left">factor</td>
 </tr>
 <tr class="odd">
 <td align="left">video_error_or_removed</td>
+<td align="left">factor</td>
 </tr>
 <tr class="even">
 <td align="left">description</td>
+<td align="left">factor</td>
 </tr>
 </tbody>
 </table>

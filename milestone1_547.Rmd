@@ -15,7 +15,7 @@ library(rmarkdown)
 # Data Description
 The [dataset](https://www.kaggle.com/datasnaek/youtube-new) `Trending YouTube Video Statistics' is put together by [Mitchell Jolly](https://mitchelljolly.com/) from YouTube API, which was last updated on 2019-06-02. The scripts that scraped the data from YouTube API can be found [here](https://github.com/mitchelljy/Trending-YouTube-Scraper). 
 
-There are 10 datasets presented specific to the following countries: USA, Great Britain, Germany, Canada, France, Russia, Mexico, South Korea, Japan and India. We choose the Canada dataset to explore. The dataset contains rows of trending videos which include features like the category, tags, number of views, likes, dislikes and shares.
+There are 10 datasets presented specific to the following countries: USA, Great Britain, Germany, Canada, France, Russia, Mexico, South Korea, Japan and India. We choose the Canada dataset to explore. The dataset contains rows of trending videos which include features like category, tags, number of views, likes, dislikes and shares.
 
 ```{r}
 # read Canada dataset csv file
