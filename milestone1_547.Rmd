@@ -38,8 +38,3 @@ kable(feature_type)
 ```
 
 
-```{r}
-colnames(feature)[0] <- "features" 
-kable(features)
-```
-
