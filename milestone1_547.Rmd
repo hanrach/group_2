@@ -51,8 +51,74 @@ ggplot(CAN, aes(views, likes)) +
   theme_bw()
 ```
 
+See how many videos are in each category.
+
+```{r}
+category_vids <- CAN %>% group_by(category_id) %>% 
+  tally() %>% 
+  arrange(desc(n))
+  kable(category_vids)
+```
+
+Need to plot this.
+
+```{r}
+
+category_vids %>% ggplot(aes(y=n,
+             x = fct_reorder(as.factor(category_vids$category_id),
+                             category_vids$n,
+                             max, .incr=TRUE))) +
+  geom_bar(stat="identity") + 
+  coord_flip() + 
+  ylab("count") + 
+  xlab("category") + 
+  theme_bw() +
+  theme(legend.position = "none") +
+  ggtitle("Number of videos by Category")
+```
+
+The category corresponding to its ID can be found [here]( https://developers.google.com/youtube/v3/docs/videoCategories/list ). 
+
+Top 5 Categories are:
+
+- Category 24: Entertainment
+- Category 25: News and Politics
+- Category 22: People and Blogs
+- Category 23: Comedy
+- Category 10: Music
+
+Bottom 5 Categories are:
+
+- Category 30: Movies
+- Category 29: Nonprofits & Activism
+- Category 43: Shows
+- Category 2: Autos and Vehicles
+- Category 15: Pets and Animals
+
+
+```{r}
+library(tidyverse)
+library(corrplot)
+```
+
+Explore correlation between numerical columns.
+
+```{r}
+CAN %>% select(views, likes, dislikes,comment_count) %>% 
+  cor() %>% 
+  round(2) %>% 
+  corrplot(
+    type="lower", 
+    method="color", 
+    tl.srt=45,
+    addCoef.col = "black",
+    diag = FALSE)
+```
+
+
 
 Mean views, likes, dislikes and comment counts for each channel
+
 ```{r}
 Channel_means <- CAN %>%
   select(channel_title, views, likes, dislikes, comment_count) %>%
@@ -61,8 +127,11 @@ Channel_means <- CAN %>%
             mean_likes = mean(likes),
             mean_dislikes = mean(dislikes),
             mean_comments = mean(comment_count))
-kable(Channel_means)
+datatable(Channel_means)
+```
 
+Could maybe aggregate these data. 
+```{r}
 ggplot(Channel_means, aes(mean_likes, mean_views))+
   geom_point()
 ```
@@ -71,6 +140,12 @@ ggplot(Channel_means, aes(mean_likes, mean_views))+
 What are the trends between comment count and video likes/dislikes?
 
 What are the trends between views per video and likes/dislikes?
+
+How do comment counts/likes/dislikes/views change over time?
+
+Trend between comment count and number of views?
+
+
 
 
 # Plan of action
