@@ -120,17 +120,22 @@ CAN %>% select(views, likes, dislikes,comment_count) %>%
 Mean views, likes, dislikes and comment counts for each channel
 
 ```{r}
-channel.agg <- aggregate(CAN[,8:11], by = list(CAN$channel_title), FUN = mean)
+channel.agg <- aggregate(CAN[,8:11], 
+                         by = list(CAN$channel_title), 
+                         FUN = mean)
 ```
 
 Could maybe aggregate these data. 
 ```{r}
 ggplot(channel.agg, aes(likes, views))+
-  geom_point()
+  geom_point() +
+  theme_bw()
 ```
 
-# Research question
-What are the trends between comment count and video likes/dislikes?
+# Research questions
+
+Does the number of comment counts on Youtube videos correlate with the number of likes or dislikes on a video? 
+What trends exist between comment count and video likes/dislikes?
 
 What are the trends between views per video and likes/dislikes?
 
@@ -142,3 +147,8 @@ Trend between comment count and number of views?
 
 
 # Plan of action
+
+Proposed plots:
+
+- time series of comment counts/likes/dislikes & views
+
