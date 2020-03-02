@@ -47,7 +47,10 @@ Plot of trend between likes and views
 ```{r}
 ggplot(CAN, aes(views, likes)) +
   geom_point() + 
+  scale_x_continuous(labels = scales::comma_format()) +
+  scale_y_continuous(labels = scales::comma_format()) +
   labs(x = "Views", y = "Likes") +
+  ggtitle("Trends between Youtube video views and likes")+
   theme_bw()
 ```
 
@@ -117,35 +120,45 @@ CAN %>% select(views, likes, dislikes,comment_count) %>%
 
 
 
-Mean views, likes, dislikes and comment counts for each channel
-
+Mean views, likes, dislikes and comment counts for video category
 ```{r}
-Channel_means <- CAN %>%
-  select(channel_title, views, likes, dislikes, comment_count) %>%
-  group_by(channel_title) %>%
-  summarise(mean_views = mean(views),
-            mean_likes = mean(likes),
-            mean_dislikes = mean(dislikes),
-            mean_comments = mean(comment_count))
-datatable(Channel_means)
+category.agg <- aggregate(CAN[,8:11], 
+                         by = list(CAN$category_id), 
+                        FUN = mean) %>%
+  rename(category_id = Group.1)
+
+category.agg$category_id <- as.factor(category.agg$category_id)
 ```
 
-Could maybe aggregate these data. 
+
 ```{r}
-ggplot(Channel_means, aes(mean_likes, mean_views))+
-  geom_point()
+category.agg %>%
+  arrange(desc(views)) %>%
+  top_n(10) %>%
+  ggplot(aes(likes, views)) +
+  geom_point(aes(color = category_id)) +
+  labs(x = "Likes", y= "Views") + 
+  scale_x_continuous(labels = scales::comma_format()) +
+  scale_y_continuous(labels = scales::comma_format()) +
+  ggtitle( "Mean video views and likes for the top 10 most viewed video categories") + 
+  theme_bw()
 ```
 
-# Research question
-What are the trends between comment count and video likes/dislikes?
+# Research questions
 
-What are the trends between views per video and likes/dislikes?
+Does the number of comment counts on Youtube videos correlate with the number of likes or dislikes on a video? 
+- What trends exist between comment count and video likes/dislikes?
+
+Does the number of views of a Youtube video correlate with the number of comments it recieves?
+- What are the trends between views per video and likes/dislikes?
 
 How do comment counts/likes/dislikes/views change over time?
 
-Trend between comment count and number of views?
-
+What is the relationship between video category, number of views it recieves, likes/dislikes and comment count? 
 
 
 
 # Plan of action
+
+With our research questions we are mainly interested in the comment counts, likes, dislikes, views, and how these change over time. Hence we will perform subsequent analysis using this reduced dataset, after dealing with any missing values. To investigate the questions we will plot time series of the data to visualise trends in variables over time as well as perform  both simple and multiple linear regression analysis to estimate the relationship between variables.
+
