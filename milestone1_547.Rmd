@@ -120,19 +120,12 @@ CAN %>% select(views, likes, dislikes,comment_count) %>%
 Mean views, likes, dislikes and comment counts for each channel
 
 ```{r}
-Channel_means <- CAN %>%
-  select(channel_title, views, likes, dislikes, comment_count) %>%
-  group_by(channel_title) %>%
-  summarise(mean_views = mean(views),
-            mean_likes = mean(likes),
-            mean_dislikes = mean(dislikes),
-            mean_comments = mean(comment_count))
-datatable(Channel_means)
+channel.agg <- aggregate(CAN[,8:11], by = list(CAN$channel_title), FUN = mean)
 ```
 
 Could maybe aggregate these data. 
 ```{r}
-ggplot(Channel_means, aes(mean_likes, mean_views))+
+ggplot(channel.agg, aes(likes, views))+
   geom_point()
 ```
 
