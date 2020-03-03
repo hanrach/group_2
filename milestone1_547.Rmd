@@ -26,8 +26,8 @@ CAN <- read.csv(file = 'data/CAvideos.csv')
 
 In this dataset, there are 40881 observations and 16 features.
 ```{r}
-nrow(CAN) %>% kable
-ncol(CAN) %>% kable
+nrow(CAN) 
+ncol(CAN)
 ```
 
 
@@ -122,14 +122,16 @@ CAN %>% select(views, likes, dislikes,comment_count) %>%
 
 We note the highest correlation between the number of likes and number of comments, and the lowest correlation beetween number of views and number of dislikes. 
 
-Mean views, likes, dislikes and comment counts for video category
+Here we compute the mean views, likes, dislikes and comment counts for video category.
 ```{r}
 category.agg <- aggregate(CAN[,8:11], 
                          by = list(CAN$category_id), 
                         FUN = mean) %>%
   rename(category_id = Group.1)
 
-category.agg$category_id <- as.factor(category.agg$category_id)
+category.agg$category_id <- as.factor(category.agg$category_id) 
+
+kable(category.agg)
 ```
 
 
@@ -148,17 +150,10 @@ category.agg %>%
 
 # Research questions
 
-Does the number of comment counts on Youtube videos correlate with the number of likes or dislikes on a video? 
-
-- What trends exist between comment count and video likes/dislikes?
-
-Does the number of views of a Youtube video correlate with the number of comments it recieves?
-- What are the trends between views per video and likes/dislikes?
-
-How do comment counts/likes/dislikes/views change over time?
-
 What is the relationship between video category, number of views it recieves, likes/dislikes and comment count? 
 
+  - Does the number of comment counts on Youtube videos correlate with the number of likes or dislikes on a video? 
+  - How do comment counts/likes/dislikes/views change over time?
 
 
 # Plan of action
