@@ -16,23 +16,22 @@ library(plotly)
 # Data Description
 The [dataset](https://www.kaggle.com/datasnaek/youtube-new) `Trending YouTube Video Statistics' is put together by [Mitchell Jolly](https://mitchelljolly.com/) from YouTube API, which was has records from 2008 and was last updated on 2019-06-02. The scripts that scraped the data from YouTube API can be found [here](https://github.com/mitchelljy/Trending-YouTube-Scraper), and the primary aim of the dataset is for use in determining the year's top trending Youtube videos. 
 
-There are 10 datasets presented specific to the following countries: USA, Great Britain, Germany, Canada, France, Russia, Mexico, South Korea, Japan and India. We choose the Canada dataset to explore. The dataset contains rows of trending videos which include features like category, tags, number of views, likes, dislikes and shares.
-
-
+There are 10 datasets presented specific to the following countries: USA, Great Britain, Germany, Canada, France, Russia, Mexico, South Korea, Japan and India. We choose the Canada dataset to explore. The dataset contains rows of trending videos which include features like category, trending date, tags, number of views, likes, dislikes, shares and descriptions of videos.
 
 ```{r}
 # read Canada dataset csv file
 CAN <- read.csv(file = 'data/CAvideos.csv')
 ```
 
-# EDA
 
 In this dataset, there are 40881 observations and 16 features.
 ```{r}
-nrow(CAN)
+nrow(CAN) 
 ncol(CAN)
 ```
 
+
+The following are tye data types of the sixteen columns in the dataset.
 
 ```{r show-tibble}
 features <- CAN %>% colnames() %>% as_tibble()
@@ -42,28 +41,31 @@ colnames(feature_type)<-c("Features","Type")
 kable(feature_type)
 ```
 
+For some columns like title, tags and description, it makes more sense for its data class to be `char` instead of `factor`. This may be part of the data grooming process. 
 
-Plot of trend between likes and views
+# EDA
+
+We plot of trend between likes and views:
 ```{r}
 ggplot(CAN, aes(views, likes)) +
-  geom_point() + 
+  geom_point(alpha =0.2,position="jitter", color = "blue") + 
   scale_x_continuous(labels = scales::comma_format()) +
   scale_y_continuous(labels = scales::comma_format()) +
   labs(x = "Views", y = "Likes") +
   ggtitle("Trends between Youtube video views and likes")+
   theme_bw()
 ```
+We see that in general the number of likes increase as we have more views. The points are concentrated at the bottom left corner (there are more videos with number of views less than 50 million, and likes less than 1 million). 
 
-See how many videos are in each category.
+We explore how many videos are in each category.
 
 ```{r}
 category_vids <- CAN %>% group_by(category_id) %>% 
   tally() %>% 
   arrange(desc(n))
-  kable(category_vids)
+kable(category_vids)
 ```
 
-Need to plot this.
 
 ```{r}
 
@@ -104,7 +106,7 @@ library(tidyverse)
 library(corrplot)
 ```
 
-Explore correlation between numerical columns.
+Next, we explore correlation between numerical columns.
 
 ```{r}
 CAN %>% select(views, likes, dislikes,comment_count) %>% 
@@ -114,20 +116,22 @@ CAN %>% select(views, likes, dislikes,comment_count) %>%
     type="lower", 
     method="color", 
     tl.srt=45,
-    addCoef.col = "black",
+    addCoef.col = "white",
     diag = FALSE)
 ```
 
+We note the highest correlation between the number of likes and number of comments, and the lowest correlation beetween number of views and number of dislikes. 
 
-
-Mean views, likes, dislikes and comment counts for video category
+Here we compute the mean views, likes, dislikes and comment counts for video category.
 ```{r}
 category.agg <- aggregate(CAN[,8:11], 
                          by = list(CAN$category_id), 
                         FUN = mean) %>%
   rename(category_id = Group.1)
 
-category.agg$category_id <- as.factor(category.agg$category_id)
+category.agg$category_id <- as.factor(category.agg$category_id) 
+
+kable(category.agg)
 ```
 
 
@@ -145,7 +149,11 @@ category.agg %>%
 ```
 
 # Research questions
+
 What is the relationship between video category, number of views it recieves, likes/dislikes and comment count? 
+
+- Does the number of comment counts on Youtube videos correlate with the number of likes or dislikes on a video?
+- What trends exist between comment count and video likes/dislikes
 
 - Does the number of comment counts on Youtube videos correlate with the number of likes or dislikes on a video?
 - What trends exist between comment count and video likes/dislikes
