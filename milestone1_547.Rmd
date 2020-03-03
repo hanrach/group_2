@@ -14,7 +14,7 @@ library(plotly)
 ```
 
 # Data Description
-The [dataset](https://www.kaggle.com/datasnaek/youtube-new) `Trending YouTube Video Statistics' is put together by [Mitchell Jolly](https://mitchelljolly.com/) from YouTube API, which was last updated on 2019-06-02. The scripts that scraped the data from YouTube API can be found [here](https://github.com/mitchelljy/Trending-YouTube-Scraper). 
+The [dataset](https://www.kaggle.com/datasnaek/youtube-new) `Trending YouTube Video Statistics' is put together by [Mitchell Jolly](https://mitchelljolly.com/) from YouTube API, which was has records from 2008 and was last updated on 2019-06-02. The scripts that scraped the data from YouTube API can be found [here](https://github.com/mitchelljy/Trending-YouTube-Scraper), and the primary aim of the dataset is for use in determining the year's top trending Youtube videos. 
 
 There are 10 datasets presented specific to the following countries: USA, Great Britain, Germany, Canada, France, Russia, Mexico, South Korea, Japan and India. We choose the Canada dataset to explore. The dataset contains rows of trending videos which include features like category, tags, number of views, likes, dislikes and shares.
 
@@ -145,18 +145,10 @@ category.agg %>%
 ```
 
 # Research questions
-
-Does the number of comment counts on Youtube videos correlate with the number of likes or dislikes on a video? 
-- What trends exist between comment count and video likes/dislikes?
-
-Does the number of views of a Youtube video correlate with the number of comments it recieves?
-- What are the trends between views per video and likes/dislikes?
-
-How do comment counts/likes/dislikes/views change over time?
-
 What is the relationship between video category, number of views it recieves, likes/dislikes and comment count? 
 
-
+- Does the number of comment counts on Youtube videos correlate with the number of likes or dislikes on a video?
+- What trends exist between comment count and video likes/dislikes
 
 # Plan of action
 
