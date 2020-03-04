@@ -152,7 +152,8 @@ category.agg %>%
 
 What is the relationship between video category, number of views it recieves, likes/dislikes and comment count? 
 
-
+- Does the number of comment counts on Youtube videos correlate with the number of likes or dislikes on a video?
+- What trends exist between comment count and video likes/dislikes
 
 - Does the number of comment counts on Youtube videos correlate with the number of likes or dislikes on a video?
 - What trends exist between comment count and video likes/dislikes
