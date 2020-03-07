@@ -1,0 +1,53 @@
+---
+title: "Untitled"
+author: "Rachel Han"
+date: "07/03/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+```{r}
+library(dplyr)
+```
+
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+CAN_tibble <- CAN %>% as_tibble
+CAN_tibble
+```
+
+```{r}
+CAN_tibble %>% mutate(title = as.character(title),
+                      channel_title = as.character(channel_title),
+                      description = as.character(description),
+                      tags = as.character(tags),
+                      thumbnail_link = as.character(thumbnail_link))
+```
+
+
+```{r}
+CAN_tibble %>% mutate(trending_date = as.character(trending_date) %>% 
+                        as.Date("%y.%d.%m"))
+```
+
+```{r}
+library(tidyverse)
+CAN_tibble %>% mutate(publish_time = as.character(publish_time) %>%
+                        str_replace("T", " ") %>%
+                        str_remove("Z") %>% 
+                        as.POSIXct(format = "%Y/%m/%d %H:%M:%S"))
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
