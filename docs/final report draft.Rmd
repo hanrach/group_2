@@ -14,12 +14,12 @@ This report investigates `Trending YouTube Video Statistics’, which was has re
 
 
 # EDA
-![Trend between likes and views](path-to-image-here)
-![Correlation between views, likes, dislikes and comment count](path-to-image-here)
-![Mean video views and likes for the top 10 most viewed video categories](path-to-image-here)
-```{r}
 
-```
+![Trend between likes and views](../images/views_likes.png)
+![Number of videos by category](../images/num_vids_category.png)
+![Correlation between views, likes, dislikes and comment count](../images/corr_plot.png)
+![Mean video views and likes for the top 10 most viewed video categories](../images/top10_mean_views_likes.png)
+
 
 # Methods
 ```{r}
