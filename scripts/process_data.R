@@ -40,6 +40,8 @@ main <- function(data_path,save_path) {
                           str_remove("Z") %>% 
                           as.POSIXct(format = "%Y/%m/%d %H:%M:%S")
                         )
+  
+  print("Data processing done!")
   tryCatch(
     {
       message("Saving processed data..")

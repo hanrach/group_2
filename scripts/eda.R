@@ -79,6 +79,8 @@ main <- function(image_path) {
       theme_bw()
   ggsave(plot=p4, filename='top10_mean_views_likes.png',path=image_path)
   
+  print("EDA successfully completed and saved images to /images!")
+  
 }
 
 main(opt$image_path)
