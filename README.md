@@ -25,3 +25,5 @@ Milestones
 
 `Rscript scripts/process_data.r --data_path="data/YouTube_data.csv" --save_path="/data/YouTube_processed.csv"`
 
+`Rscript scripts/eda.r --image_path="images/"`
+
