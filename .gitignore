@@ -38,6 +38,3 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-/data/YouTube_processed.csv
-
-/group_2.Rproj
