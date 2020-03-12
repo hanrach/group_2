@@ -1,4 +1,8 @@
 
+.PHONY all clean
+
+# need to fix file names
+all : docs/final-report-draft.html docs/finalreportdraft.pdf
 
 # load data
 # need to fix this one
@@ -17,6 +21,7 @@ images/views_likes.png images/corr_plot.png images/num_vids_category.png images/
 # need to add this
 		
 # final report
+# need to fix file names
 docs/final-report-draft.html docs/finalreportdraft.pdf : images/views_likes.png images/corr_plot.png images/num_vids_category.png images/top10_mean_views_likes.png docs/final report draft.Rmd data/YouTube_processed.csv sripts/knit.R 
 	Rscript src/knit.R --finalreport="docs/final report draft.Rmd"
 
@@ -28,3 +33,4 @@ clean :
 		rm -f images/*
 		rm -f docs/*.md
 		rm -f docs/*.html
+		
