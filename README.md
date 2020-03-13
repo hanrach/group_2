@@ -40,5 +40,6 @@ Milestone 3: [Final report]()
 
 ### Option 2
 
-Run makefile that contains all of the above scripts 
+Run 
+`make all`.
 
