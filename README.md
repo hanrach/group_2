@@ -32,11 +32,11 @@ Milestone 3: [Final report]()
 
 `Rscript scripts/process_data.r --data_path="data/Youtube_data.csv" --save_path="data/YouTube_processed.csv"`
 
-`Rscript scripts/eda.r --image_path="images/"`
+`Rscript scripts/eda.R --image_path="images/"`
 
-`Rscript scripts/analysis.r --data_path="data/YouTube_processed.csv"`
+`Rscript scripts/analysis.R --data_path="data/Youtube_processed.csv"`
 
-`Rscript scripts/knit.r --final report= "docs/finalreport.rmd"`
+`Rscript scripts/knit.R --final_report="docs/finalreport.Rmd"`
 
 ### Option 2
 
