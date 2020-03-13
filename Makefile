@@ -5,7 +5,7 @@
 
 
 # load data
-Youtube_data.csv : scripts/load_data.R
+data/Youtube_data.csv : scripts/load_data.R
 	Rscript scripts/load_data.R --data_url="https://raw.githubusercontent.com/STAT547-UBC-2019-20/group_2_youtube/master/data/CAvideos.csv"
 
 # clean data
@@ -20,8 +20,8 @@ images/views_likes.png images/corr_plot.png images/num_vids_category.png images/
 rds/lm.rds rds/glm.rds images/lm_status_views.png images/pois_status_views.png : scripts/analysis.R data/Youtube_processed.csv
 	Rscript scripts/analysis.R --data_path="data/Youtube_processed.csv"
 		
-# final report
-docs/finalreport.html docs/finalreport.pdf : images/ rds/ docs/finalreport.Rmd data/YouTube_processed.csv scripts/knit.R 
+# knit final report
+docs/finalreport.html docs/finalreport.pdf : rds/lm.rds rds/glm.rds images/lm_status_views.png images/pois_status_views.png images/views_likes.png images/corr_plot.png images/num_vids_category.png images/top10_mean_views_likes.png data/YouTube_processed.csv docs/finalreport.Rmd scripts/knit.R 
 	Rscript scripts/knit.R --final_report="docs/finalreport.Rmd"
 
 
@@ -32,4 +32,5 @@ clean :
 	rm -f images/*
 	rm -f docs/*.md
 	rm -f docs/*.html
+	rm -f rds/*
 		
