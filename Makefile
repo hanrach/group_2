@@ -5,9 +5,8 @@
 all : docs/final-report-draft.html docs/finalreportdraft.pdf
 
 # load data
-# need to fix this one
 Youtube_data.csv : scripts/load_data 
-	Rscript scripts/load_data.R --data_url=
+	Rscript scripts/load_data.R --data_url="https://raw.githubusercontent.com/STAT547-UBC-2019-20/group_2_youtube/master/data/CAvideos.csv""
 
 # clean data
 data/YouTube_processed.csv : scripts/process_data.R data/Youtube_data.csv
@@ -24,11 +23,12 @@ rds/lm.rds rds/lmSum.rds rds/lmSum2.rds images/status_commentcountreg.png : scri
 # final report
 # need to fix file names/this is general
 docs/final-report-draft.html docs/finalreportdraft.pdf : images/views_likes.png images/corr_plot.png images/num_vids_category.png images/top10_mean_views_likes.png docs/final report draft.Rmd data/YouTube_processed.csv sripts/knit.R 
-	Rscript src/knit.R --finalreport="docs/final report draft.Rmd"
+	Rscript scripts/knit.R --finalreport="docs/final report draft.Rmd"
 
+# to delete output files and run analysis from scratch
 clean :
-		rm -f data/*
-		rm -f images/*
-		rm -f docs/*.md
-		rm -f docs/*.html
+	rm -f data/*
+	rm -f images/*
+	rm -f docs/*.md
+	rm -f docs/*.html
 		
