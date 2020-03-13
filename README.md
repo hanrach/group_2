@@ -17,7 +17,9 @@ Milestone 2: [Final report draft](https://hanrach.github.io/group_2/docs/final-r
 
 2. Install the following packages:
 - tidyverse
-- ggplot
+- ggplot2
+- here
+- glue
 - docopt
 
 3. Run the following scripts in order as specified in the base `group_2_youtube` directory on the terminal:
