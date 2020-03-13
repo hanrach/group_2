@@ -9,6 +9,8 @@ library(tidyverse)
 library(ggplot2)
 library(knitr)
 library(DT)
+library(glue)
+library(here)
 library(rmarkdown)
 library(plotly)
 ```
@@ -20,7 +22,7 @@ There are 10 datasets presented specific to the following countries: USA, Great 
 
 ```{r}
 # read Canada dataset csv file
-CAN <- read.csv(file = 'data/CAvideos.csv')
+CAN <- read.csv(file = glue(here(),'/data/YouTube_data.csv'))
 ```
 
 
