@@ -27,18 +27,11 @@ main <- function(data_path) {
 	# create linear model
 	fit.lm <- lm(views ~ likes + dislikes, data = CAN)
 	saveRDS(fit.lm, file = "rds/lm.rds")
-	# summary of model
-	summary <- tidy(fit.lm)
-	saveRDS(summary, file = "rds/tidy_lm.rds") 
-	# one row model summaries and goodness of fit measures
-	summary2 <- glance(fit.lm)
-	saveRDS(summary2, file = "rds/glance_lm.rds")
 	
 	# create poisson regression model (suitable for count data)
 	fit.glm <- glm(views ~ likes + dislikes, family = "poisson", data = CAN)
 	saveRDS(fit.glm, file = "rds/glm.rds")
-  saveRDS(tidy(fit.glm), file = "rds/tidy_pois.rds") 
-	saveRDS(glance(fit.glm), file = "rds/glance_pois.rds")
+
 	
 	
 
