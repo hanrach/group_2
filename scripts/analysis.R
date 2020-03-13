@@ -12,6 +12,14 @@ library(ggplot2)
 opt <- docopt(doc)
 
 main <- function(data_path) { 
+	tryCatch(
+    {
+      message("Reading in data...")
+      CAN <- read.csv(data_path)
+    },
+    error = {function(cnd) print(glue("error object is {cnd}"))},
+    finally = {message("Data has been read successfully!")}
+	)
 	
 	# read processed data
 	CAN <- read.csv(data_path)
@@ -39,7 +47,14 @@ p1 <- CAN %>% as_tibble()	%>%
 	scale_x_continuous(labels = scales::comma_format()) +
   scale_y_continuous(labels = scales::comma_format())
 ggsave(plot=p1, filename='images/status_commentcountreg.png')
-	
+
+print("Data analysis done!")
+  tryCatch(
+  	
+    error = {function(cnd) print(glue::glue("error object is {cnd}"))},
+    finally = {message("Data analysis saved successfully!")}
+    
+  )	
 }
 
 main(opt$data_path)
