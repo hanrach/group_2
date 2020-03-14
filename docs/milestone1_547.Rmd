@@ -12,6 +12,7 @@ library(DT)
 library(glue)
 library(corrplot)
 library(here)
+library(kableExtra)
 library(rmarkdown)
 library(plotly)
 ```
@@ -21,7 +22,7 @@ The [dataset](https://www.kaggle.com/datasnaek/youtube-new) `Trending YouTube Vi
 
 There are 10 datasets presented specific to the following countries: USA, Great Britain, Germany, Canada, France, Russia, Mexico, South Korea, Japan and India. We choose the Canada dataset to explore. The dataset contains rows of trending videos which include features like category, trending date, tags, number of views, likes, dislikes, shares and descriptions of videos.
 
-```{r}
+```{r,warning=FALSE}
 # read Canada dataset csv file
 CAN <- read.csv(file = '../data/youtube_processed.csv')
 ```
@@ -40,7 +41,7 @@ features <- CAN %>% colnames() %>% tibble()
 types <- CAN %>% sapply(class) %>% tibble()
 feature_type <- cbind(features,types)
 colnames(feature_type)<-c("Features","Type")
-kable(feature_type)
+kable(feature_type) %>% kableExtra::kable_styling(full_width = F)
 ```
 
 For some columns like title, tags and description, it makes more sense for its data class to be `char` instead of `factor`. This may be part of the data grooming process. 
@@ -67,13 +68,9 @@ We explore how many videos are in each category.
 category_vids <- CAN %>% group_by(category_id) %>% 
   tally() %>% 
   arrange(desc(n))
-kable(category_vids)
+kable(category_vids) %>%  kableExtra::kable_styling(full_width = F)
 ```
 
-
-```{r}
-unique(CAN$trending_date)
-```
 
 ```{r}
 list_of_category = c(24,25,22,23,10)
@@ -92,7 +89,7 @@ CAN %>% filter(category_id==24) %>%
   scale_x_date(date_breaks = "months")
 ```
 
-trending channels
+Trending channels
 
 ```{r}
 CAN %>% group_by(channel_title) %>% 
@@ -164,11 +161,11 @@ category.agg <- aggregate(CAN[,8:11],
 
 category.agg$category_id <- as.factor(category.agg$category_id) 
 
-kable(category.agg)
+kable(category.agg) %>%  kableExtra::kable_styling(full_width = F)
 ```
 
 
-```{r}
+```{r, warning=FALSE}
 category.agg %>%
   arrange(desc(views)) %>%
   top_n(10) %>%

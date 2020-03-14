@@ -15,6 +15,7 @@ library(ggplot2)
 library(knitr)
 library(DT)
 library(broom)
+library(kableExtra)
 library(glue)
 library(here)
 library(rmarkdown)
@@ -47,7 +48,7 @@ features <- CAN %>% colnames() %>% tibble()
 types <- CAN %>% sapply(class) %>% tibble()
 feature_type <- cbind(features,types)
 colnames(feature_type)<-c("Features","Type")
-kable(feature_type)
+kable(feature_type) %>%  kableExtra::kable_styling(full_width = F)
 ```
 
 # EDA

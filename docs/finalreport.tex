@@ -142,11 +142,11 @@ The dataset contains rows of trending videos which include features like
 category, trending date, tags, number of views, likes, dislikes, shares
 and descriptions of videos.
 
-The primary aim of this investigation is to determine the relationship
-between video category, number of views it recieves, likes/dislikes and
-comment count? Specificially, we aim to investigate whether the number
-of views on Youtube videos correlate with the number of likes or
-dislikes on a video.
+The primary aim of this investigation is to determine \textbf{the
+relationship between video category, number of views it recieves,
+likes/dislikes and comment count?} Specificially, we aim to investigate
+\textbf{whether the number of views on Youtube videos correlate with the
+number of likes or dislikes on a video.}
 
 \hypertarget{about-data}{%
 \section{About data}\label{about-data}}
@@ -348,8 +348,63 @@ explanotory variable each, \texttt{likes} and \texttt{dislikes}.
 Although we see a poor fit, we see that it does capture the trend that
 as number of likes or dislikes increase, the views also increase.
 
+Next we present the residuals vs fitted plot from poisson regression. We
+see that the residuals do not exceed 1e+7 like in the linear regression,
+but we still see skewed distribution of the points. As the value of
+fitted values (\texttt{views}) increase, the more deviation we have from
+the actual value. This suggests that neither linear or poisson
+regression does well in modelling \texttt{views} at higher values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(fit.glm,}\DataTypeTok{which=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{finalreport_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+Here is a plot that performs poisson regression on views with
+\texttt{likes} and \texttt{dislikes}. The model exhibits an exponential
+behaviour. It fits reasonably well for the lower values for the response
+variable but quickly overshoots.
+\includegraphics{../images/pois_status_views.png}
+
+We compute the sum of the squared residuals of both models and observe
+that poisson regression yields a smaller number. One reason might be
+that the sum of the residuals from the outliers in poisson regression
+does not outweigh the total sum of residuals in linear regression.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{resid}\NormalTok{(fit.lm)}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.285747e+17
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{resid}\NormalTok{(fit.glm)}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 78292616784
+\end{verbatim}
+
 \hypertarget{discussionconclusion}{%
 \section{Discussion/Conclusion}\label{discussionconclusion}}
+
+We have explored the YouTube dataset from Kaggle in this report by a
+scatter plot, bar graph and a correlation plot to observe trends in the
+data. Then we performed regression analysis on \texttt{views} which we
+assumed is a function of \texttt{likes} and \texttt{dislikes}. We
+encountered difficulty in fitting the model with both linear and poisson
+regression, due to the outliers. One way to deal with this is to create
+a weight vector such that the outliers carry little weights. This may be
+studied for our future work.
 
 
 \end{document}
