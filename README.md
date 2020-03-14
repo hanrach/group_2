@@ -11,7 +11,7 @@ Milestone 1: [Dataset, EDA and research question](https://hanrach.github.io/grou
 
 Milestone 2: [Final report draft](https://hanrach.github.io/group_2/docs/final-report-draft.html)
 
-Milestone 3: [Final report]()
+Milestone 3: Please see the usage section below to create the final report.
 
 ## Usage
 
