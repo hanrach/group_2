@@ -32,6 +32,7 @@ Milestone 3: [Final report]()
 
 `Rscript scripts/process_data.r --data_path="data/youtube_data.csv" --save_path="data/youtube_processed.csv"`
 
+
 `Rscript scripts/eda.R --image_path="images/"`
 
 `Rscript scripts/analysis.R --data_path="data/youtube_processed.csv"`
