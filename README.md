@@ -11,7 +11,7 @@ Milestone 1: [Dataset, EDA and research question](https://hanrach.github.io/grou
 
 Milestone 2: [Final report draft](https://hanrach.github.io/group_2/docs/final-report-draft.html)
 
-Milestone 3: See the usage below to create the final report. Note that the repository comes with clean directories (without data, images and knitted documents).
+Milestone 3: See the usage below to create the final report. Note that the repository comes with clean directories (without data and images).
 
 ## Usage
 
