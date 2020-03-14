@@ -5,27 +5,28 @@
 
 
 # load data
-data/Youtube_data.csv : scripts/load_data.R
+data/youtube_data.csv : scripts/load_data.R
 	Rscript scripts/load_data.R --data_url="https://raw.githubusercontent.com/STAT547-UBC-2019-20/group_2_youtube/master/data/CAvideos.csv"
 
 # clean data
-data/YouTube_processed.csv : scripts/process_data.R data/Youtube_data.csv
-	Rscript scripts/process_data.R --data_path="data/Youtube_data.csv" --save_path="data/YouTube_processed.csv"
+data/youtube_processed.csv : scripts/process_data.R data/youtube_data.csv
+	Rscript scripts/process_data.R --data_path="data/youtube_data.csv" --save_path="data/youtube_processed.csv"
 
 # eda
 images/views_likes.png images/corr_plot.png images/num_vids_category.png images/top10_mean_views_likes.png : scripts/eda.R 
 	Rscript scripts/eda.R --image_path="images/"
 
 # analysis
-rds/lm.rds rds/glm.rds images/lm_status_views.png images/pois_status_views.png : scripts/analysis.R data/Youtube_processed.csv
-	Rscript scripts/analysis.R --data_path="data/Youtube_processed.csv"
+rds/lm.rds rds/glm.rds images/lm_status_views.png images/pois_status_views.png : scripts/analysis.R data/youtube_processed.csv
+	Rscript scripts/analysis.R --data_path="data/youtube_processed.csv"
 		
 # knit final report
-docs/finalreport.html docs/finalreport.pdf : rds/lm.rds rds/glm.rds images/lm_status_views.png images/pois_status_views.png images/views_likes.png images/corr_plot.png images/num_vids_category.png images/top10_mean_views_likes.png data/YouTube_processed.csv docs/finalreport.Rmd scripts/knit.R 
+docs/finalreport.html docs/finalreport.pdf : rds/lm.rds rds/glm.rds images/lm_status_views.png images/pois_status_views.png images/views_likes.png images/corr_plot.png images/num_vids_category.png images/top10_mean_views_likes.png data/youtube_processed.csv docs/finalreport.Rmd scripts/knit.R 
 	Rscript scripts/knit.R --final_report="docs/finalreport.Rmd"
 
-
+# run all the dependencies to create the final report
 all : docs/finalreport.html docs/finalreport.pdf
+
 # to delete output files and run analysis from scratch
 clean :
 	rm -f data/*

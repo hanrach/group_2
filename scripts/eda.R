@@ -16,7 +16,7 @@ opt <- docopt(doc)
 main <- function(image_path) {
   
   # read processed data
-  CAN <- read.csv("data/YouTube_processed.csv")
+  CAN <- read.csv("data/youtube_processed.csv")
   
   # plot trends between views and likes
   p1 <- ggplot(CAN, aes(views, likes)) +
