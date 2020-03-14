@@ -10,6 +10,7 @@ library(ggplot2)
 library(knitr)
 library(DT)
 library(glue)
+library(corrplot)
 library(here)
 library(rmarkdown)
 library(plotly)
@@ -35,8 +36,8 @@ ncol(CAN)
 The following are tye data types of the sixteen columns in the dataset.
 
 ```{r show-tibble}
-features <- CAN %>% colnames() %>% as_tibble()
-types <- CAN %>% sapply(class) %>% as_tibble()
+features <- CAN %>% colnames() %>% tibble()
+types <- CAN %>% sapply(class) %>% tibble()
 feature_type <- cbind(features,types)
 colnames(feature_type)<-c("Features","Type")
 kable(feature_type)
@@ -58,6 +59,8 @@ ggplot(CAN, aes(views, likes)) +
 ```
 We see that in general the number of likes increase as we have more views. The points are concentrated at the bottom left corner (there are more videos with number of views less than 50 million, and likes less than 1 million). 
 
+
+
 We explore how many videos are in each category.
 
 ```{r}
@@ -67,6 +70,39 @@ category_vids <- CAN %>% group_by(category_id) %>%
 kable(category_vids)
 ```
 
+
+```{r}
+unique(CAN$trending_date)
+```
+
+```{r}
+list_of_category = c(24,25,22,23,10)
+CAN %>% filter(category_id==24) %>%
+  mutate(year_month = format(as.Date(trending_date), "%Y-%m") ) %>%
+  group_by(channel_title, trending_date) %>% 
+  # summarize(mean_likes = mean(likes),
+  #           mean_dislikes= mean(dislikes),
+  #           mean_comment_count = mean(comment_count),
+  #           mean_views = mean(views)) %>%
+  arrange(trending_date) %>%
+  ggplot(aes(x=as.Date(trending_date),y=views)) + geom_line() +
+  labs(x = "Date", y = "Number of views") +
+  ggtitle("View counts over time in entertainment category") +
+  scale_y_continuous(labels = scales::comma_format()) +
+  scale_x_date(date_breaks = "months")
+```
+
+trending channels
+
+```{r}
+CAN %>% group_by(channel_title) %>% 
+  summarise(count = n(),
+            sum_views = mean(views),
+            sum_likes = mean(likes),
+            sum_comments = mean(comment_count),
+            sum_dislikes = mean(dislikes)) %>% 
+  arrange(desc(sum_comments))
+```
 
 ```{r}
 
