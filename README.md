@@ -80,7 +80,10 @@ make docs/finalreport.html docs/finalreport.pdf
 - You can run `make clean` to delete all the files in the subdirectories except the scipts.
 
 ### Tests
- 
-- Run `test_dir("tests/testthat")` in the base directory `group_2_youtube` in Rstudio console before `make all`. All the tests should fail since the directories are clean.
-- After `make all`, all the tests should pass.
+
+Tests are written to make sure all the dependencies are loaded in. It's likely to be useful if you are not running `make all` and choose to run each step incrementally. 
+
+- Run `test_dir("tests/testthat")` in the base directory `group_2_youtube` in Rstudio console. All the tests should fail in the beginning since the directories are clean.
+
+- After all the steps, all the tests should pass.
 
