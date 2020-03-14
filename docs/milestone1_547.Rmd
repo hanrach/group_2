@@ -22,11 +22,10 @@ There are 10 datasets presented specific to the following countries: USA, Great 
 
 ```{r}
 # read Canada dataset csv file
-CAN <- read.csv(file = glue(here(),'/data/YouTube_data.csv'))
+CAN <- read.csv(file = '../data/youtube_processed.csv')
 ```
 
-
-In this dataset, there are 40881 observations and 16 features.
+Below is the number of rows and columns for the dataset.
 ```{r}
 nrow(CAN) 
 ncol(CAN)
@@ -102,11 +101,7 @@ Bottom 5 Categories are:
 - Category 2: Autos and Vehicles
 - Category 15: Pets and Animals
 
-
-```{r}
-library(tidyverse)
-library(corrplot)
-```
+## Correlation plots
 
 Next, we explore correlation between numerical columns.
 
