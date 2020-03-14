@@ -7,7 +7,7 @@ Rachel Han & Marion Nyberg
 ## Dataset
 Our dataset is [Daily trending videos on YouTube](https://www.kaggle.com/datasnaek/youtube-new).
 
-Milestone 1: [Dataset, EDA and research question](https://hanrach.github.io/group_2/blob/master/docs/milestone1_547.html)
+Milestone 1: [Dataset, EDA and research question](https://stat547-ubc-2019-20.github.io/group_2_youtube/docs/milestone1_547.html)
 
 Milestone 2: See usage below.
 
@@ -21,6 +21,8 @@ Milestone 3: See the usage below to create the final report. Note that the repos
 1. Clone this repo: `git clone https://github.com/STAT547-UBC-2019-20/group_2_youtube`
 
 2. Install the following packages:
+
+- kableExtra
 - tidyverse
 - ggplot2
 - knitr
@@ -76,4 +78,12 @@ make docs/finalreport.html docs/finalreport.pdf
 - Or you can simply run `make all` to execute the above commands all at once.
 
 - You can run `make clean` to delete all the files in the subdirectories except the scipts.
+
+### Tests
+
+Tests are written to make sure all the dependencies are loaded in. It's likely to be useful if you are not running `make all` and choose to run each step incrementally. 
+
+- Run `test_dir("tests/testthat")` in the base directory `group_2_youtube` in Rstudio console. All the tests should fail in the beginning since the directories are clean.
+
+- After all the steps, all the tests should pass.
 
