@@ -31,7 +31,5 @@ all : docs/finalreport.html docs/finalreport.pdf
 clean :
 	rm -f data/*
 	rm -f images/*
-	rm -f docs/*.md
-	rm -f docs/*.html
 	rm -f rds/*
 		

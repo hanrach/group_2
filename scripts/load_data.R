@@ -5,7 +5,8 @@
 Usage: load_data.R --data_url=<data_url>
 " -> doc 
 library(docopt)
-
+library(glue)
+library(here)
 opt <- docopt(doc) 
 
 
