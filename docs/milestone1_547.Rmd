@@ -74,7 +74,7 @@ kable(category_vids) %>%  kableExtra::kable_styling(full_width = F)
 
 ```{r}
 list_of_category = c(24,25,22,23,10)
-CAN %>% filter(category_id==24) %>%
+CAN  %>%
   mutate(year_month = format(as.Date(trending_date), "%Y-%m") ) %>%
   group_by(channel_title, trending_date) %>% 
   # summarize(mean_likes = mean(likes),
