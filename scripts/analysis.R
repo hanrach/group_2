@@ -1,6 +1,6 @@
 
 
-"This script runs a linear regression on /data/YouTube.csv
+"This script runs a linear regression on /data/YouTube_processed.csv
 
 Usage: analysis.R --data_path=<data_path>" -> doc
 
@@ -23,38 +23,44 @@ main <- function(data_path) {
 	
 	# read processed data
 	CAN <- read.csv(data_path)
-	
-	# create linear model
-	linear_regression <- lm(comment_count ~ likes + dislikes, data = CAN)
-	saveRDS(linear_regression, file = "rds/lm.rds")
 
-	# summary of model
-	summary <- tidy(linear_regression)
-	saveRDS(summary, file = "rds/lmSum.rds") 
+	# create linear model
+	fit.lm <- lm(views ~ likes + dislikes, data = CAN)
+	saveRDS(fit.lm, file = "rds/lm.rds")
 	
-	# one row model summaries and goodness of fit measures
-	summary2 <- glance(linear_regression)
-	saveRDS(summary2, file = "rds/lmSum2.rds") 
+	# create poisson regression model (suitable for count data)
+	fit.glm <- glm(views ~ likes + dislikes, family = "poisson", data = CAN)
+	saveRDS(fit.glm, file = "rds/glm.rds")
+
+	
+	
 
 p1 <- CAN %>% as_tibble()	%>%
-	select(comment_count, likes, dislikes) %>%
+	select(views, likes, dislikes) %>%
 	gather(status, count, likes:dislikes) %>%
-	ggplot(., aes(comment_count, count), group = status) + 
+	ggplot(., aes(count, views), group = status) + 
 	geom_point(aes(color = status)) +
 	geom_smooth(aes(color = status), method = "lm") +
-	labs(x = "Comment count", y = "Status count") +
+	labs(x = "Status count", y = "Number of views") +
 	theme_bw() + 
 	scale_x_continuous(labels = scales::comma_format()) +
   scale_y_continuous(labels = scales::comma_format())
-ggsave(plot=p1, filename='images/status_commentcountreg.png')
+ggsave(plot=p1, filename='images/lm_status_views.png')
+
+p1 <- CAN %>% as_tibble()	%>%
+  select(views, likes, dislikes) %>%
+  gather(status, count, likes:dislikes) %>%
+  ggplot(., aes(count, views), group = status) + 
+  geom_point(aes(color = status)) +
+  geom_smooth(aes(color = status), method = "glm",method.args=(family="poisson")) +
+  labs(x = "Status count", y = "Number of views") +
+  theme_bw() + 
+  scale_x_continuous(labels = scales::comma_format()) +
+  scale_y_continuous(labels = scales::comma_format())
+ggsave(plot=p1, filename='images/pois_status_views.png')
+
 
 print("Data analysis done!")
-  tryCatch(
-  	
-    error = {function(cnd) print(glue::glue("error object is {cnd}"))},
-    finally = {message("Data analysis saved successfully!")}
-    
-  )	
 }
 
 main(opt$data_path)

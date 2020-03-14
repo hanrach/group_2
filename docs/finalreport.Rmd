@@ -1,0 +1,33 @@
+---
+title: "Final report draft"
+author: "Rachel Han & Marion Nyberg"
+date: "07/03/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+This report investigates `Trending YouTube Video Statistics’, which was has records from 2008 and was last updated on 2019-06-02. The primary aim of the dataset is for use in determining the year’s top trending Youtube videos. Whilst it includes data specific to 10 different countries, we have chosen to explore the dataset for Canada only. The dataset contains rows of trending videos which include features like category, trending date, tags, number of views, likes, dislikes, shares and descriptions of videos. The primary aim of this investigation is to determine the relationship between video category, number of views it recieves, likes/dislikes and comment count? Specificially, we aim to investigate whether the number of comment counts on Youtube videos correlate with the number of likes or dislikes on a video, and what trends exist between comment count and video likes/dislikes.
+
+
+# EDA
+![](../images/views_likes.png)
+
+# Methods
+```{r}
+
+```
+
+# Results
+```{r}
+
+```
+
+# Discussion/conclusion
+```{r}
+
+```
+

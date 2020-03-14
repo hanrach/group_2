@@ -30,15 +30,17 @@ Milestone 3: [Final report]()
 
 `Rscript scripts/load_data.r --data_url="https://raw.githubusercontent.com/STAT547-UBC-2019-20/group_2_youtube/master/data/CAvideos.csv"`
 
-`Rscript scripts/process_data.r --data_path="data/YouTube_data.csv" --save_path="data/YouTube_processed.csv"`
+`Rscript scripts/process_data.r --data_path="data/youtube_data.csv" --save_path="data/youtube_processed.csv"`
 
-`Rscript scripts/eda.r --image_path="images/"`
 
-`Rscript scripts/analysis.r --data_path="data/YouTube_processed.csv"`
+`Rscript scripts/eda.R --image_path="images/"`
 
-`Rscript scripts/knit.r --final report= "docs/finalreport.rmd"`
+`Rscript scripts/analysis.R --data_path="data/youtube_processed.csv"`
+
+`Rscript scripts/knit.R --final_report="docs/finalreport.Rmd"`
 
 ### Option 2
 
-Run makefile that contains all of the above scripts 
+Run 
+`make all`.
 
