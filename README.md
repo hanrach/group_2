@@ -13,6 +13,7 @@ Milestone 2: See usage below.
 
 Milestone 3: See the usage below to create the final report. Note that the repository comes with clean directories (without data and images).
 
+
 ## Usage
 
 ### Option 1
@@ -22,11 +23,14 @@ Milestone 3: See the usage below to create the final report. Note that the repos
 2. Install the following packages:
 - tidyverse
 - ggplot2
+- knitr
+- broom
 - here
 - glue
 - broom
 - corrplot
 - docopt
+- rmarkdown
 
 3. Run the following scripts in order as specified in the base `group_2_youtube` directory on the terminal:
 
