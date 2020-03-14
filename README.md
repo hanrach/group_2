@@ -21,6 +21,8 @@ Milestone 3: See the usage below to create the final report. Note that the repos
 1. Clone this repo: `git clone https://github.com/STAT547-UBC-2019-20/group_2_youtube`
 
 2. Install the following packages:
+
+- kableExtra
 - tidyverse
 - ggplot2
 - knitr
