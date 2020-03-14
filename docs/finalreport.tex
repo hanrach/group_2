@@ -69,7 +69,6 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\usepackage{longtable,booktabs}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -129,6 +128,10 @@
 \begin{document}
 \maketitle
 
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
@@ -181,33 +184,77 @@ The following are data types of the columns in the dataset.
 \NormalTok{types <-}\StringTok{ }\NormalTok{CAN }\OperatorTok{%>%}\StringTok{ }\KeywordTok{sapply}\NormalTok{(class) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{tibble}\NormalTok{()}
 \NormalTok{feature_type <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(features,types)}
 \KeywordTok{colnames}\NormalTok{(feature_type)<-}\KeywordTok{c}\NormalTok{(}\StringTok{"Features"}\NormalTok{,}\StringTok{"Type"}\NormalTok{)}
-\KeywordTok{kable}\NormalTok{(feature_type)}
+\KeywordTok{kable}\NormalTok{(feature_type) }\OperatorTok{%>%}\StringTok{  }\NormalTok{kableExtra}\OperatorTok{::}\KeywordTok{kable_styling}\NormalTok{(}\DataTypeTok{full_width =}\NormalTok{ F)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{longtable}[]{@{}ll@{}}
-\toprule
-Features & Type\tabularnewline
-\midrule
-\endhead
-video\_id & character\tabularnewline
-trending\_date & Date\tabularnewline
-title & character\tabularnewline
-channel\_title & character\tabularnewline
-category\_id & numeric\tabularnewline
-publish\_time & logical\tabularnewline
-tags & character\tabularnewline
-views & numeric\tabularnewline
-likes & numeric\tabularnewline
-dislikes & numeric\tabularnewline
-comment\_count & numeric\tabularnewline
-thumbnail\_link & character\tabularnewline
-comments\_disabled & logical\tabularnewline
-ratings\_disabled & logical\tabularnewline
-video\_error\_or\_removed & logical\tabularnewline
-description & character\tabularnewline
-\bottomrule
-\end{longtable}
+Features
+
+Type
+
+video\_id
+
+character
+
+trending\_date
+
+Date
+
+title
+
+character
+
+channel\_title
+
+character
+
+category\_id
+
+numeric
+
+publish\_time
+
+logical
+
+tags
+
+character
+
+views
+
+numeric
+
+likes
+
+numeric
+
+dislikes
+
+numeric
+
+comment\_count
+
+numeric
+
+thumbnail\_link
+
+character
+
+comments\_disabled
+
+logical
+
+ratings\_disabled
+
+logical
+
+video\_error\_or\_removed
+
+logical
+
+description
+
+character
 
 \hypertarget{eda}{%
 \section{EDA}\label{eda}}
