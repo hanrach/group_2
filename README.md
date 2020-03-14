@@ -79,3 +79,8 @@ make docs/finalreport.html docs/finalreport.pdf
 
 - You can run `make clean` to delete all the files in the subdirectories except the scipts.
 
+### Tests
+ 
+- Run `test_dir("tests/testthat")` in the base directory `group_2_youtube` in Rstudio console before `make all`. All the tests should fail since the directories are clean.
+- After `make all`, all the tests should pass.
+
