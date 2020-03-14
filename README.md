@@ -28,7 +28,7 @@ Milestone 3: [Final report]()
 
 3. Run the following scripts in order as specified in the base `group_2_youtube` directory on the terminal:
 
-`Rscript scripts/load_data.r --data_url="https://raw.githubusercontent.com/STAT547-UBC-2019-20/group_2_youtube/master/data/CAvideos.csv"`
+`Rscript scripts/load_data.r --data_url="https://raw.githubusercontent.com/hanrach/youtube_dataset/master/CAvideos.csv"`
 
 `Rscript scripts/process_data.r --data_path="data/youtube_data.csv" --save_path="data/youtube_processed.csv"`
 
