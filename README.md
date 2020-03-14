@@ -22,9 +22,12 @@ Milestone 3: Please see the usage section below to create the final report.
 2. Install the following packages:
 - tidyverse
 - ggplot2
+- knitr
+- broom
 - here
 - glue
 - docopt
+- rmarkdown
 
 3. Run the following scripts in order as specified in the base `group_2_youtube` directory on the terminal:
 
