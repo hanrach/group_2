@@ -6,7 +6,7 @@
 
 # load data
 data/youtube_data.csv : scripts/load_data.R
-	Rscript scripts/load_data.R --data_url="https://raw.githubusercontent.com/STAT547-UBC-2019-20/group_2_youtube/master/data/CAvideos.csv"
+	Rscript scripts/load_data.R --data_url="https://raw.githubusercontent.com/hanrach/youtube_dataset/master/CAvideos.csv"
 
 # clean data
 data/youtube_processed.csv : scripts/process_data.R data/youtube_data.csv

@@ -15,7 +15,7 @@ main <- function(data_url) {
     {
       message("Attempting to download data and write to disk...")
       dat <-  read.csv(url(data_url))
-      write.csv(dat, here::here("data", "Youtube_data.csv"))
+      write.csv(dat, here::here("data", "youtube_data.csv"))
     },
     error = {function(cnd) print(glue("error object is {cnd}"))},
     finally = {message("Data has been downloaded successfully!")}

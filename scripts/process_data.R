@@ -26,7 +26,7 @@ main <- function(data_path,save_path) {
 
   # Data type setting:
   # title, description, tags -> strings
-  CAN_tibble %>% mutate(title = as.character(title),
+  CAN_clean <- CAN_tibble %>% mutate(title = as.character(title),
                         channel_title = as.character(channel_title),
                         description = as.character(description),
                         tags = as.character(tags),
@@ -45,7 +45,7 @@ main <- function(data_path,save_path) {
   tryCatch(
     {
       message("Saving processed data..")
-      write.csv(CAN_tibble,save_path)
+      write.csv(CAN_clean,save_path)
     },
     error = {function(cnd) print(glue("error object is {cnd}"))},
     finally = {message("Processed data has been saved successfully!")}
