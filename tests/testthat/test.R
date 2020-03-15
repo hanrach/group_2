@@ -9,6 +9,9 @@ test_that("data is in the data directory", {
   expect_true(file.exists("../../data/youtube_processed.csv"))
 })
 
+test_that("no NAs in processed data", {
+  expect_false(anyNA("../../data/youtube_processed.csv"))
+})
 
 test_that("Images from EDA are created", {
   expect_true(file.exists("../../images/views_likes.png"))
