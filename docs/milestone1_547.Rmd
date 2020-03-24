@@ -22,10 +22,12 @@ The [dataset](https://www.kaggle.com/datasnaek/youtube-new) `Trending YouTube Vi
 
 There are 10 datasets presented specific to the following countries: USA, Great Britain, Germany, Canada, France, Russia, Mexico, South Korea, Japan and India. We choose the Canada dataset to explore. The dataset contains rows of trending videos which include features like category, trending date, tags, number of views, likes, dislikes, shares and descriptions of videos.
 
+Make sure you have loaded in the data first and processed it. 
 ```{r,warning=FALSE}
 # read Canada dataset csv file
-CAN <- read.csv(file = '../data/youtube_processed.csv')
+CAN <- read.csv('../data/youtube_processed.csv')
 ```
+
 
 Below is the number of rows and columns for the dataset.
 ```{r}
@@ -89,7 +91,7 @@ CAN %>% filter(category_id==24) %>%
   scale_x_date(date_breaks = "months")
 ```
 
-Trending channels
+Trending channels are as follows in order of top trending to least trending:
 
 ```{r}
 CAN %>% group_by(channel_title) %>% 
@@ -98,10 +100,11 @@ CAN %>% group_by(channel_title) %>%
             sum_likes = mean(likes),
             sum_comments = mean(comment_count),
             sum_dislikes = mean(dislikes)) %>% 
-  arrange(desc(sum_comments))
+  arrange(desc(sum_comments)) %>% datatable()
 ```
 
-```{r}
+Here is a plot of number of videos by category.
+```{r, warning=FALSE}
 
 category_vids %>% ggplot(aes(y=n,
              x = fct_reorder(as.factor(category_vids$category_id),
@@ -152,31 +155,31 @@ CAN %>% select(views, likes, dislikes,comment_count) %>%
 
 We note the highest correlation between the number of likes and number of comments, and the lowest correlation beetween number of views and number of dislikes. 
 
-Here we compute the mean views, likes, dislikes and comment counts for video category.
-```{r}
-category.agg <- aggregate(CAN[,8:11], 
-                         by = list(CAN$category_id), 
-                        FUN = mean) %>%
-  rename(category_id = Group.1)
+<!--This code doesn't work! Here we compute the mean views, likes, dislikes and comment counts for video category. -->
+<!-- ```{r,warning=FALSE} -->
+<!-- category.agg <- aggregate(CAN[,8:11],  -->
+<!--                          by = list(CAN$category_id),  -->
+<!--                         FUN = mean) %>% -->
+<!--   rename(category_id = Group.1) -->
 
-category.agg$category_id <- as.factor(category.agg$category_id) 
+<!-- category.agg$category_id <- as.factor(category.agg$category_id)  -->
 
-kable(category.agg) %>%  kableExtra::kable_styling(full_width = F)
-```
+<!-- kable(category.agg) %>%  kableExtra::kable_styling(full_width = F) -->
+<!-- ``` -->
 
 
-```{r, warning=FALSE}
-category.agg %>%
-  arrange(desc(views)) %>%
-  top_n(10) %>%
-  ggplot(aes(likes, views)) +
-  geom_point(aes(color = category_id)) +
-  labs(x = "Likes", y= "Views") + 
-  scale_x_continuous(labels = scales::comma_format()) +
-  scale_y_continuous(labels = scales::comma_format()) +
-  ggtitle( "Mean video views and likes for the top 10 most viewed video categories") + 
-  theme_bw()
-```
+<!-- ```{r, warning=FALSE} -->
+<!-- category.agg %>% -->
+<!--   arrange(desc(views)) %>% -->
+<!--   top_n(10) %>% -->
+<!--   ggplot(aes(likes, views)) + -->
+<!--   geom_point(aes(color = category_id)) + -->
+<!--   labs(x = "Likes", y= "Views") +  -->
+<!--   scale_x_continuous(labels = scales::comma_format()) + -->
+<!--   scale_y_continuous(labels = scales::comma_format()) + -->
+<!--   ggtitle( "Mean video views and likes for the top 10 most viewed video categories") +  -->
+<!--   theme_bw() -->
+<!-- ``` -->
 
 # Research questions
 
