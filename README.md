@@ -95,4 +95,4 @@ _Usage:_ Mary is a psychologist who is trying to understand how certain personal
 
 ![Dashboard draft sketch](dashdraft.png)
 
-Link to [Draft app](http://127.0.0.1:8050/)
+Link to [Draft app](app.R)
