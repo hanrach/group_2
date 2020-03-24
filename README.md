@@ -7,12 +7,17 @@ Rachel Han & Marion Nyberg
 ## Dataset
 Our dataset is [Daily trending videos on YouTube](https://www.kaggle.com/datasnaek/youtube-new).
 
-Milestone 1: [Dataset, EDA and research question](https://stat547-ubc-2019-20.github.io/group_2_youtube/docs/milestone1_547.html)
+Milestone 1:
+To produce knit `milestone1_547.Rmd`, run the following first:
+- `make data/youtube_data.csv `
+- `make data/youtube_processed.csv`
+The knitted version can be found [here](https://stat547-ubc-2019-20.github.io/group_2_youtube/docs/milestone1_547.html).
 
 Milestone 2: See usage below.
 
 Milestone 3: See the usage below to create the final report. Note that the repository comes with clean directories (without data and images).
 
+Click [here](https://stat547-ubc-2019-20.github.io/group_2_youtube/docs/finalreport.html) for the final report.
 
 ## Usage
 

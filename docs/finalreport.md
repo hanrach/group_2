@@ -20,11 +20,9 @@ output:
 
 
 # Introduction
-This report investigates `Trending YouTube Video Statistics’, which was has records from 2008 and was last updated on 2019-06-02. The primary aim of the dataset is for use in determining the year’s top trending Youtube videos. Whilst it includes data specific to 10 different countries, we have chosen to explore the dataset for Canada only.
+This report investigates `Trending YouTube Video Statistics’, which was has records from 2008 and was last updated on 2019-06-02. The primary aim of the dataset is for use in determining the year’s top trending Youtube videos.  Whilst it includes data specific to 10 different countries, we have chosen to explore the dataset for Canada only.
 
-The dataset contains rows of trending videos which include features like category, trending date, tags, number of views, likes, dislikes, shares and descriptions of videos. 
-
-The primary aim of this investigation is to determine **the relationship between video category, number of views it recieves, likes/dislikes and comment count?** Specificially, we aim to investigate **whether the number of views on Youtube videos correlate with the number of likes or dislikes on a video.**
+The dataset contains rows of trending videos which include features like category, trending date, tags, number of views, likes, dislikes, shares and descriptions of videos. Previous research has found that despite the large number of channels on Youtube, on average 85% of all views go to just 3% of channels (Bärtl 2018). We will explore this dataset further by investigating **the relationship between video category, number of views it recieves, likes/dislikes and comment count?** Specificially, we aim to investigate **whether the number of views on Youtube videos correlate with the number of likes or dislikes on a video.**
 
 # About data
 
@@ -203,10 +201,10 @@ glance(fit.lm)
 
 ```
 ## # A tibble: 1 x 11
-##   r.squared adj.r.squared  sigma statistic p.value    df  logLik    AIC
-##       <dbl>         <dbl>  <dbl>     <dbl>   <dbl> <int>   <dbl>  <dbl>
-## 1     0.726         0.726 1.77e6    54283.       0     3 -6.46e5 1.29e6
-## # … with 3 more variables: BIC <dbl>, deviance <dbl>, df.residual <int>
+##   r.squared adj.r.squared  sigma statistic p.value    df  logLik    AIC    BIC
+##       <dbl>         <dbl>  <dbl>     <dbl>   <dbl> <int>   <dbl>  <dbl>  <dbl>
+## 1     0.726         0.726 1.77e6    54283.       0     3 -6.46e5 1.29e6 1.29e6
+## # … with 2 more variables: deviance <dbl>, df.residual <int>
 ```
 
 
@@ -257,3 +255,8 @@ sum(resid(fit.glm)^2)
 # Discussion/Conclusion
 
 We have explored the YouTube dataset from Kaggle in this report by a scatter plot, bar graph and a correlation plot to observe trends in the data. Then we performed regression analysis on `views` which we assumed is a function of `likes` and `dislikes`. We encountered difficulty in fitting the model with both linear and poisson regression, due to the outliers. One way to deal with this is to create a weight vector such that the outliers carry little weights. This may be studied for our future work.
+
+# References
+
+Bärtl, M. (2018). YouTube channels, uploads and views: A statistical analysis of the past 10 years. Convergence, 24(1), 16–32. https://doi.org/10.1177/1354856517736979
+
