@@ -92,3 +92,12 @@ Tests are written to make sure all the dependencies are loaded in. It's likely t
 
 - After all the steps, all the tests should pass.
 
+### Dashboard proposal
+
+_Description:_ This app, titled “Canadian YouTube Statistics” will allow users to explore the relationships between YouTube video categories, view, comment and like/dislike counts. On the landing page there will be a bar chart that displays the number of videos per category. From a dropdown list, users will be able to filter a scatter plot by video category so that they are able to visualise the relationship between view count and likes/dislikes for their category of interest (e.g. within the video category ‘Music’). Likes and dislikes will be colour coded and regression lines showing the relationship between view number and likes and dislikes will be shown. Similarly, there will be another plot that allows users to filter video categories and explore the relationship between comment count and likes and dislikes for their category of interest. Again, likes and dislikes will be colour coded and there will be regression lines to show relationships between variables. There will also be 2 range slider options for both graphs that allows users to view relationships over a specific range of like/dislike counts. 
+
+_Usage:_ Mary is a psychologist who is trying to understand how certain personalities may be correlated with their level of engagement on social media. To do this she is using video category as a proxy for personality. She is trying to determine whether watching a specific video category means you are more or less likely to comment or press like/dislike. When Mary visits the ‘Canadian YouTube Statistics’ app she will be able to view which video categories are the most popular, and then visualise the relationships between the number of likes/dislikes, comment count and view number. From a dropdown she will be able to filter the scatter plots so that she is viewing the relationships specific to each video category. She is also able to scale the scatter plots so that she is viewing the data for a specific range of like/dislike numbers, e.g. view relationships for video categories with <1000 likes. When she does this, she notices that for the video category ‘Entertainment’, there is the highest correlation between comment count and view number, so she hypothesizes that people who watch films of this category may have a more outspoken personality.
+
+![Dashboard draft sketch](dashdraft.png)
+
+Link to [Draft app](app.R)
