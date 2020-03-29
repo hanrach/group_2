@@ -29,7 +29,7 @@ all : docs/finalreport.html docs/finalreport.pdf
 
 # to delete output files and run analysis from scratch
 clean :
-	rm -f data/*
+	rm -f data/*.csv
 	rm -f images/*
 	rm -f rds/*
 		
