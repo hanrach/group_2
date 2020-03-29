@@ -18,6 +18,24 @@ app <- Dash$new()
 # load data
 CAN <- read.csv("data/youtube_processed.csv")
 
+#make range sliders
+views_slider <- dccRangeSlider(
+	id = 'views-slider',
+	min = 0,
+	max = 5053338,
+	step = 1,
+	value = list(1, 5053338)
+)
+
+comments_slider <- dccRangeSlider(
+	id = 'comments-slider',
+	min = 0,
+	max = 5053338,
+	step = 1,
+	value = list(1, 5053338)
+)
+
+
 # make graphs
 bar_plot <- function(){
   category_vids <- CAN %>% group_by(category_id) %>% 
@@ -27,7 +45,7 @@ bar_plot <- function(){
   p<-category_vids %>% ggplot(aes(y=n,
                                    x = fct_reorder(as.factor(category_id),
                                                    n,
-                                                   max, .incr=TRUE))) +
+                                                   max, .incr=TRUE)), customdata = category_id) +
     geom_bar(stat="identity") + 
     coord_flip() + 
     ylab("count") + 
@@ -36,7 +54,8 @@ bar_plot <- function(){
     theme(legend.position = "none") +
     ggtitle("Number of videos by Category")
   
-  ggplotly(p, tooltip = c("text"))
+  ggplotly(p, tooltip = c("text")) %>%
+  	layout(clickmode = 'event+select')
 }
 
 views_scatter <- function(category = 24){
@@ -97,17 +116,45 @@ div_main <- htmlDiv(
   list(
     barplot,
     views_scatterplot,
-    comments_scatterplot
+    views_slider,
+    comments_scatterplot,
+    comments_slider
   )
 )
+
 
 app$layout(
 	div_header,
 	htmlDiv(
 	  list(
-	    div_main
+	  	div_main
+	  		)
+	  	)
 	  )
-	)
-)
+	
+# add callbacks
+#to update views scatter plot based on rangeslider
+app$callback(
+	output = list(id = 'views_scatterplot', property = 'figure'),
+	params = list(input(id = 'views-slider', property = 'value')),
+	function(xaxis_value, views_slider) {
+		views_scatter(xaxis_value, views_slider)
+	})
+
+#to update comments scatter plot based on rangeslider
+app$callback(
+	output = list(id = 'comments_scatterplot', property = 'figure'),
+	params = list(input(id = 'comments-slider', property = 'value')),
+	function(xaxis_value, comments_slider) {
+		views_scatter(xaxis_value, comments_slider)
+	})
+
+#to update views scatter plot by clicking on barplot
+app$callback(output = list(id = 'views_scatterplot', property = 'figure'),
+						 params = list(input(id='barplot', property='clickData'),
+						 function(clickData) {
+						 	category_id = clickData$points[[1]]$customdata
+						 	views_scatter(category_id)
+						 }))
 
 app$run_server(host='0.0.0.0',debug=TRUE)
