@@ -75,6 +75,7 @@ kable(category_vids) %>%  kableExtra::kable_styling(full_width = F)
 
 
 ```{r}
+library(ggridges)
 list_of_category = c(24,25,22,23,10)
 CAN %>% filter(category_id==24) %>%
   mutate(year_month = format(as.Date(trending_date), "%Y-%m") ) %>%
@@ -84,7 +85,7 @@ CAN %>% filter(category_id==24) %>%
   #           mean_comment_count = mean(comment_count),
   #           mean_views = mean(views)) %>%
   arrange(trending_date) %>%
-  ggplot(aes(x=as.Date(trending_date),y=views)) + geom_line() +
+  ggplot(aes(x=as.Date(trending_date),y=views)) + geom_bar(stat = "identity") +
   labs(x = "Date", y = "Number of views") +
   ggtitle("View counts over time in entertainment category") +
   scale_y_continuous(labels = scales::comma_format()) +
