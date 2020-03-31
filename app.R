@@ -80,7 +80,7 @@ bar_plot <- function(){
 }
 
 
-comments_scatter <- function(category_select = 24, likes_max = max_status_count, yaxis = "views") { ### original comments_scatter <- function(category_select = 24, likes_max = max_status_count) {
+comments_scatter <- function(category_select = 24, likes_max = max_status_count, yaxis = "views") { 
   y_label <- yaxisKey$label[yaxisKey$value == yaxis]
 	data <- CAN %>% filter(category_id == category_select) %>% 
     filter(likes <= likes_max)
@@ -91,9 +91,9 @@ comments_scatter <- function(category_select = 24, likes_max = max_status_count,
     scale_y_continuous(labels = scales::comma_format()) +
   	xlab("Count of likes/dislikes") +
   	ylab(y_label)+
-    ggtitle(paste0("Trends Between Likes/Dislikes and ", y_label, " for Category ", toString(category_select)))+ ###### original gtitle(paste0("Trends between likes/dislikes and comments for category ", toString(category_select)))
+    ggtitle(paste0("Trends Between Likes/Dislikes and ", y_label, " for Category ", toString(category_select)))+ 
     theme_bw()
-  
+
   ggplotly(p)
 }
 
@@ -114,20 +114,17 @@ yaxisDropdown <- dccDropdown(
 
 barplot <- dccGraph(
   id = 'barplot',
-  figure = bar_plot(),
-  config = list('displaylogo' = FALSE)
+  figure = bar_plot()
 )
 
 histogram <- dccGraph(
   id = 'histogram',
-  figure = histogram_plot(),
-  config = list('displaylogo' = FALSE)
+  figure = histogram_plot()
 )
 
 comments_scatterplot <- dccGraph(
   id = 'comments_scatterplot',
-  figure = comments_scatter(),
-  config = list('displaylogo' = FALSE)
+  figure = comments_scatter()
 )
 
 # layout set up
@@ -153,11 +150,12 @@ div_side <- htmlDiv(
 		htmlBr(),
 		yaxisDropdown,
 		htmlBr(),
-		htmlLabel('Change range of like/dislike values:'),
+		htmlLabel('Change range of like/dislike values on the scatter plot:'),
 		htmlBr(),
 		comments_slider,
 		htmlBr(),
-		htmlLabel('Click on the category on the bar plot see the corresponding histogram and scatter plot.')
+		htmlLabel('Click on the category on the bar plot see the corresponding histogram and scatter plot.'),
+		htmlBr()
 	),
 	style = list('background-color'='lightgrey', 
 							 'columnCount'=1, 
