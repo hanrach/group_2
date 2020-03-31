@@ -147,9 +147,11 @@ div_header <- htmlDiv(
 #this is the sidebar
 div_side <- htmlDiv(
 	list(
+		htmlP('Use this dashboard to explore how different YouTube video categories are trending over time in Canada and how this is reflected in their view numbers and comment counts.'),
 		htmlLabel('Select scatter plot to display view number or comment count:'),
 		htmlBr(),
 		yaxisDropdown,
+		htmlBr(),
 		htmlLabel('Change range of like/dislike values:'),
 		htmlBr(),
 		comments_slider
@@ -157,7 +159,7 @@ div_side <- htmlDiv(
 	style = list('background-color'='lightgrey', 
 							 'columnCount'=1, 
 							 'white-space'='pre-line',
-							 'width' = '60%')
+							 'width' = '55%')
 )
 
 
