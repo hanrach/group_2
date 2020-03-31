@@ -55,7 +55,7 @@ histogram_plot <- function(category = 24) {
     scale_x_date(date_breaks = "months")+
   	theme_bw()
   
-  ggplotly(p)
+  ggplotly(p, tooltip = c("text"))
 }
 # make graphs
 bar_plot <- function(){
@@ -76,16 +76,17 @@ bar_plot <- function(){
     theme(legend.position = "none") +
     ggtitle("Number of Videos by Category")
   
-  ggplotly(p) %>% layout(clickmode = 'event+select')
+  ggplotly(p, tooltip = c("text")) %>% layout(clickmode = 'event+select')
 }
+
 
 comments_scatter <- function(category_select = 24, likes_max = max_status_count, yaxis = "views") { ### original comments_scatter <- function(category_select = 24, likes_max = max_status_count) {
   y_label <- yaxisKey$label[yaxisKey$value == yaxis]
 	data <- CAN %>% filter(category_id == category_select) %>% 
     filter(likes <= likes_max)
   p <- ggplot(data, aes(y=!!sym(yaxis))) + ### original   p <- ggplot(data, aes(y=comment_count)) 
-    geom_point(aes(x=likes, color = "likes"),alpha =0.2,position="jitter") + 
-    geom_point(aes(x = dislikes, color = "dislikes"), alpha =0.2,position="jitter") + 
+    geom_point(aes(label = title, x=likes, color = "likes"),alpha =0.2,position="jitter") + 
+    geom_point(aes(label = title, x = dislikes, color = "dislikes"), alpha =0.2,position="jitter") + 
     scale_x_continuous(labels = scales::comma_format()) +
     scale_y_continuous(labels = scales::comma_format()) +
   	xlab("Count of likes/dislikes") +
@@ -93,7 +94,7 @@ comments_scatter <- function(category_select = 24, likes_max = max_status_count,
     ggtitle(paste0("Trends Between Likes/Dislikes and ", y_label, " for Category ", toString(category_select)))+ ###### original gtitle(paste0("Trends between likes/dislikes and comments for category ", toString(category_select)))
     theme_bw()
   
-  ggplotly(p, tooltip = c("text"))
+  ggplotly(p)
 }
 
 
@@ -154,7 +155,9 @@ div_side <- htmlDiv(
 		htmlBr(),
 		htmlLabel('Change range of like/dislike values:'),
 		htmlBr(),
-		comments_slider
+		comments_slider,
+		htmlBr(),
+		htmlLabel('Click on the category on the bar plot see the corresponding histogram and scatter plot.')
 	),
 	style = list('background-color'='lightgrey', 
 							 'columnCount'=1, 
