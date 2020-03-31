@@ -55,7 +55,7 @@ histogram_plot <- function(category = 24) {
     scale_x_date(date_breaks = "months")+
   	theme_bw()
   
-  ggplotly(p)
+  ggplotly(p, tooltip = c("text"))
 }
 # make graphs
 bar_plot <- function(){
@@ -76,8 +76,9 @@ bar_plot <- function(){
     theme(legend.position = "none") +
     ggtitle("Number of Videos by Category")
   
-  ggplotly(p) %>% layout(clickmode = 'event+select')
+  ggplotly(p, tooltip = c("text")) %>% layout(clickmode = 'event+select')
 }
+
 
 comments_scatter <- function(category_select = 24, likes_max = max_status_count, yaxis = "views") { ### original comments_scatter <- function(category_select = 24, likes_max = max_status_count) {
   y_label <- yaxisKey$label[yaxisKey$value == yaxis]
@@ -154,7 +155,9 @@ div_side <- htmlDiv(
 		htmlBr(),
 		htmlLabel('Change range of like/dislike values:'),
 		htmlBr(),
-		comments_slider
+		comments_slider,
+		htmlBr(),
+		htmlLabel('Click on the category on the bar plot see the corresponding histogram and scatter plot.')
 	),
 	style = list('background-color'='lightgrey', 
 							 'columnCount'=1, 
