@@ -85,8 +85,8 @@ comments_scatter <- function(category_select = 24, likes_max = max_status_count,
 	data <- CAN %>% filter(category_id == category_select) %>% 
     filter(likes <= likes_max)
   p <- ggplot(data, aes(y=!!sym(yaxis))) + ### original   p <- ggplot(data, aes(y=comment_count)) 
-    geom_point(aes(x=likes, color = "likes"),alpha =0.2,position="jitter") + 
-    geom_point(aes(x = dislikes, color = "dislikes"), alpha =0.2,position="jitter") + 
+    geom_point(aes(label = title, x=likes, color = "likes"),alpha =0.2,position="jitter") + 
+    geom_point(aes(label = title, x = dislikes, color = "dislikes"), alpha =0.2,position="jitter") + 
     scale_x_continuous(labels = scales::comma_format()) +
     scale_y_continuous(labels = scales::comma_format()) +
   	xlab("Count of likes/dislikes") +
@@ -94,7 +94,7 @@ comments_scatter <- function(category_select = 24, likes_max = max_status_count,
     ggtitle(paste0("Trends Between Likes/Dislikes and ", y_label, " for Category ", toString(category_select)))+ ###### original gtitle(paste0("Trends between likes/dislikes and comments for category ", toString(category_select)))
     theme_bw()
   
-  ggplotly(p, tooltip = c("text"))
+  ggplotly(p)
 }
 
 
