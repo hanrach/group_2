@@ -194,7 +194,7 @@ app$layout(
 			div_side
 		),
 		style = list('display' = 'flex',
-			'justify-content' = 'center')
+			'justify-content' = 'left')
 	),
 	htmlDiv(
 		list(
