@@ -145,7 +145,7 @@ div_header <- htmlDiv(
 #this is the sidebar
 div_side <- htmlDiv(
 	list(
-		htmlP('Use this dashboard to explore how different YouTube video categories are trending over time in Canada and how this is reflected in their view numbers and comment counts.'),
+		htmlP('Use this dashboard to explore how different YouTube video categories are trending over time in Canada and how this is reflected in their view numbers and comment counts. Source: https://www.kaggle.com/datasnaek/youtube-new'),
 		htmlLabel('Select scatter plot to display view number or comment count:'),
 		htmlBr(),
 		yaxisDropdown,
@@ -235,4 +235,7 @@ app$callback(output = list(id = 'comments_scatterplot', property = 'figure'),
 						 	comments_scatter(category, likes_max, yaxis)
 						 })
 
-app$run_server(host='0.0.0.0',debug=TRUE)
+app$run_server(debug=TRUE)
+
+# command to add dash app in Rstudio viewer:
+# rstudioapi::viewer("http://127.0.0.1:8050")
