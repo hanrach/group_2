@@ -23,6 +23,56 @@ options(repr.plot.width = 10, repr.plot.height = 10)
 # load data
 CAN <- read.csv("data/youtube_processed.csv")
 
+#create categories df
+cat <- tibble(label = c("Entertainment", "News & Politics", "Comedy", "Music", "Sports", "Film & Animation","Howto & Style", "Gaming", "Science & Technology", "Education", "Travel & Events", "Pets & Animals", "Autos & Vehicles", "Shows", "Science & Technology", "Movies"),
+							value = c("24", "25", "23", "10", "17", "1", "26", "20", "28", "27", "19", "15", "2", "43", "29", "30")) %>%
+	rename(ID = value,
+				 Category = label)
+
+#cat_table <- dashDataTable(
+#	id = "table",
+#	columns = lapply(colnames(cat), 
+#									 function(colName){
+#									 	list(
+#									 		id = colName,
+#									 		name = colName
+#									 	)
+#									 }),
+#	data = df_to_list(cat)
+#)
+
+
+#cat_table <- dashDataTable(
+##	style_table= list(
+#		maxHeight = '10',
+#		overflowY = 'scroll'),
+#	id = 'table-dropdown',
+#	data = df_to_list(cat),
+#	columns = list(
+#		list(id = 'Category', name = 'Category', presentation = 'dropdown'),
+#		list(id = 'Category_ID', name = 'Category_ID', presentation = 'dropdown')))
+
+cat_table <- dashDataTable(
+	fixed_rows= list(headers = TRUE, data = 0),
+	style_table = list(
+		height = '200px'
+	),
+	style_header = list(
+		backgroundColor = 'white',
+		fontWeight = 'bold'),
+	style_cell = list(textAlign = 'center'),
+	columns = lapply(colnames(cat), 
+									 function(colName){
+									 	list(
+									 		id = colName,
+									 		name = colName
+									 	)
+									 }),
+	data = df_to_list(cat)
+)
+
+
+
 #make range sliders
 max_status_count = max(max(CAN$likes),max(CAN$dislikes))
 min_status_count = 0
@@ -57,11 +107,12 @@ histogram_plot <- function(category = 24) {
   
   ggplotly(p, tooltip = c("text"))
 }
+
 # make graphs
 bar_plot <- function(){
   category_vids <- CAN %>% group_by(category_id) %>% 
     tally() %>% 
-    arrange(desc(n))
+    arrange(desc(n)) 
   
   p<-category_vids %>% ggplot(aes(y=n,
                                   x = fct_reorder(as.factor(category_id),
@@ -85,9 +136,10 @@ comments_scatter <- function(category_select = 24, likes_max = max_status_count,
 	data <- CAN %>% filter(category_id == category_select) %>% 
     filter(likes <= likes_max)
   p <- ggplot(data, aes(y=!!sym(yaxis))) + ### original   p <- ggplot(data, aes(y=comment_count)) 
-    geom_point(aes(label = title, x=likes, color = "likes"),alpha =0.2,position="jitter") + 
-    geom_point(aes(label = title, x = dislikes, color = "dislikes"), alpha =0.2,position="jitter") + 
-    scale_x_continuous(labels = scales::comma_format()) +
+    geom_point(aes(x=likes, color = "likes"),alpha =0.2,position="jitter") + 
+    geom_point(aes(x = dislikes, color = "dislikes"), alpha =0.2,position="jitter") + 
+  	scale_x_log10(labels = scales::comma_format())+
+    #scale_x_continuous(labels = scales::comma_format()) +
     scale_y_continuous(labels = scales::comma_format()) +
   	xlab("Count of likes/dislikes") +
   	ylab(y_label)+
@@ -155,12 +207,16 @@ div_side <- htmlDiv(
 		comments_slider,
 		htmlBr(),
 		htmlLabel('Click on the category on the bar plot see the corresponding histogram and scatter plot.'),
+		htmlBr(),
+		htmlLabel('Categories and their corresponding category ID:'),
+		htmlBr(),
+		cat_table,
 		htmlBr()
 	),
 	style = list('background-color'='lightgrey', 
 							 'columnCount'=1, 
 							 'white-space'='pre-line',
-							 'width' = '55%')
+							 'width' = '50%')
 )
 
 
@@ -169,42 +225,73 @@ div_barplot <- htmlDiv(
 	list(
 		barplot
 	),
-	style = list('display' = 'flex',
-							 'height' = '40%')
+	style = list('columnCount'=1)
 )
 
 #this is the main element
-div_main <- htmlDiv(
-  list(
-    histogram,
-    htmlBr(),
-    comments_scatterplot
-  ),
-  style = list('display' = 'flex',
-  						 'flex-direction'= 'column',
-  						 'width' = '50%')
-)
+#div_main <- htmlDiv(
+#  list(
+#    histogram,
+#    htmlBr(),
+#    comments_scatterplot
+#  ),
+#  style = list('display' = 'flex',
+#  						 'flex-direction'= 'row',
+#  						 'width' = '50%')
+#)
 
 
 #final layout
+#app$layout(
+#	div_header,
+#	htmlDiv(
+#		list(
+#			div_side,
+#			div_barplot
+#		),
+#		style = list('display' = 'flex',
+#			'justify-content' = 'left',
+#			'flex-direction' = 'row')
+#	),
+#	htmlDiv(
+#		list(
+#	  	div_main
+#	  		)
+#		
+#	),
+#	style = list('display' = 'flex',
+#							 'flex-direction' = 'column')
+#)
 app$layout(
-	div_header,
 	htmlDiv(
 		list(
-			div_side
-		),
-		style = list('display' = 'flex',
-			'justify-content' = 'left')
+			div_header
+		)
+	),
+	
+	
+	# Main area
+	# DROPDOWNS
+	htmlDiv(
+		list(
+			htmlDiv(
+				list(
+					div_side,
+					div_barplot
+				),
+				style = list('display' = 'flex',
+										 'flex-direcion' = 'column')
+			)
+		)
 	),
 	htmlDiv(
 		list(
-	  	div_barplot,
-	  	div_main
-	  		),
+			histogram,
+			comments_scatterplot
+		),
 		style = list('display' = 'flex',
-								 'flex-direction' = 'row',
-								 'align-items' = 'baseline')
-	  )
+								 'flex-direction' ='row')
+	)
 )
 
 	
@@ -235,7 +322,10 @@ app$callback(output = list(id = 'comments_scatterplot', property = 'figure'),
 						 	comments_scatter(category, likes_max, yaxis)
 						 })
 
+
 app$run_server(debug=TRUE)
+
+
 
 # command to add dash app in Rstudio viewer:
 # rstudioapi::viewer("http://127.0.0.1:8050")
