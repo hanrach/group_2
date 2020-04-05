@@ -23,6 +23,55 @@ options(repr.plot.width = 10, repr.plot.height = 10)
 # load data
 CAN <- read.csv("data/youtube_processed.csv")
 
+#create categories df
+cat <- tibble(label = c("Entertainment", "News & Politics", "Comedy", "Music", "Sports", "Film & Animation","Howto & Style", "Gaming", "Science & Technology", "Education", "Travel & Events", "Pets & Animals", "Autos & Vehicles", "Shows", "Science & Technology", "Movies"),
+							value = c("24", "25", "23", "10", "17", "1", "26", "20", "28", "27", "19", "15", "2", "43", "29", "30")) %>%
+	rename(ID = value,
+				 Category = label)
+
+#cat_table <- dashDataTable(
+#	id = "table",
+#	columns = lapply(colnames(cat), 
+#									 function(colName){
+#									 	list(
+#									 		id = colName,
+#									 		name = colName
+#									 	)
+#									 }),
+#	data = df_to_list(cat)
+#)
+
+
+#cat_table <- dashDataTable(
+##	style_table= list(
+#		maxHeight = '10',
+#		overflowY = 'scroll'),
+#	id = 'table-dropdown',
+#	data = df_to_list(cat),
+#	columns = list(
+#		list(id = 'Category', name = 'Category', presentation = 'dropdown'),
+#		list(id = 'Category_ID', name = 'Category_ID', presentation = 'dropdown')))
+
+cat_table <- dashDataTable(
+	fixed_rows= list(headers = TRUE, data = 0),
+	style_table = list(
+		height = '200px'
+	),
+	style_header = list(
+		backgroundColor = 'white',
+		fontWeight = 'bold'),
+	style_cell = list(textAlign = 'center'),
+	columns = lapply(colnames(cat), 
+									 function(colName){
+									 	list(
+									 		id = colName,
+									 		name = colName
+									 	)
+									 }),
+	data = df_to_list(cat)
+)
+
+
 
 #make range sliders
 max_status_count = max(max(CAN$likes),max(CAN$dislikes))
@@ -158,12 +207,16 @@ div_side <- htmlDiv(
 		comments_slider,
 		htmlBr(),
 		htmlLabel('Click on the category on the bar plot see the corresponding histogram and scatter plot.'),
+		htmlBr(),
+		htmlLabel('Categories and their corresponding category ID:'),
+		htmlBr(),
+		cat_table,
 		htmlBr()
 	),
 	style = list('background-color'='lightgrey', 
 							 'columnCount'=1, 
 							 'white-space'='pre-line',
-							 'width' = '55%')
+							 'width' = '50%')
 )
 
 
@@ -172,42 +225,73 @@ div_barplot <- htmlDiv(
 	list(
 		barplot
 	),
-	style = list('display' = 'flex',
-							 'height' = '40%')
+	style = list('columnCount'=1)
 )
 
 #this is the main element
-div_main <- htmlDiv(
-  list(
-    histogram,
-    htmlBr(),
-    comments_scatterplot
-  ),
-  style = list('display' = 'flex',
-  						 'flex-direction'= 'column',
-  						 'width' = '50%')
-)
+#div_main <- htmlDiv(
+#  list(
+#    histogram,
+#    htmlBr(),
+#    comments_scatterplot
+#  ),
+#  style = list('display' = 'flex',
+#  						 'flex-direction'= 'row',
+#  						 'width' = '50%')
+#)
 
 
 #final layout
+#app$layout(
+#	div_header,
+#	htmlDiv(
+#		list(
+#			div_side,
+#			div_barplot
+#		),
+#		style = list('display' = 'flex',
+#			'justify-content' = 'left',
+#			'flex-direction' = 'row')
+#	),
+#	htmlDiv(
+#		list(
+#	  	div_main
+#	  		)
+#		
+#	),
+#	style = list('display' = 'flex',
+#							 'flex-direction' = 'column')
+#)
 app$layout(
-	div_header,
 	htmlDiv(
 		list(
-			div_side
-		),
-		style = list('display' = 'flex',
-			'justify-content' = 'left')
+			div_header
+		)
+	),
+	
+	
+	# Main area
+	# DROPDOWNS
+	htmlDiv(
+		list(
+			htmlDiv(
+				list(
+					div_side,
+					div_barplot
+				),
+				style = list('display' = 'flex',
+										 'flex-direcion' = 'column')
+			)
+		)
 	),
 	htmlDiv(
 		list(
-	  	div_barplot,
-	  	div_main
-	  		),
+			histogram,
+			comments_scatterplot
+		),
 		style = list('display' = 'flex',
-								 'flex-direction' = 'row',
-								 'align-items' = 'baseline')
-	  )
+								 'flex-direction' ='row')
+	)
 )
 
 	
