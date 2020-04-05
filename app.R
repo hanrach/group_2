@@ -23,6 +23,7 @@ options(repr.plot.width = 10, repr.plot.height = 10)
 # load data
 CAN <- read.csv("data/youtube_processed.csv")
 
+
 #make range sliders
 max_status_count = max(max(CAN$likes),max(CAN$dislikes))
 min_status_count = 0
@@ -57,11 +58,12 @@ histogram_plot <- function(category = 24) {
   
   ggplotly(p, tooltip = c("text"))
 }
+
 # make graphs
 bar_plot <- function(){
   category_vids <- CAN %>% group_by(category_id) %>% 
     tally() %>% 
-    arrange(desc(n))
+    arrange(desc(n)) 
   
   p<-category_vids %>% ggplot(aes(y=n,
                                   x = fct_reorder(as.factor(category_id),
@@ -85,9 +87,10 @@ comments_scatter <- function(category_select = 24, likes_max = max_status_count,
 	data <- CAN %>% filter(category_id == category_select) %>% 
     filter(likes <= likes_max)
   p <- ggplot(data, aes(y=!!sym(yaxis))) + ### original   p <- ggplot(data, aes(y=comment_count)) 
-    geom_point(aes(label = title, x=likes, color = "likes"),alpha =0.2,position="jitter") + 
-    geom_point(aes(label = title, x = dislikes, color = "dislikes"), alpha =0.2,position="jitter") + 
-    scale_x_continuous(labels = scales::comma_format()) +
+    geom_point(aes(x=likes, color = "likes"),alpha =0.2,position="jitter") + 
+    geom_point(aes(x = dislikes, color = "dislikes"), alpha =0.2,position="jitter") + 
+  	scale_x_log10(labels = scales::comma_format())+
+    #scale_x_continuous(labels = scales::comma_format()) +
     scale_y_continuous(labels = scales::comma_format()) +
   	xlab("Count of likes/dislikes") +
   	ylab(y_label)+
@@ -235,7 +238,10 @@ app$callback(output = list(id = 'comments_scatterplot', property = 'figure'),
 						 	comments_scatter(category, likes_max, yaxis)
 						 })
 
+
 app$run_server(debug=TRUE)
+
+
 
 # command to add dash app in Rstudio viewer:
 # rstudioapi::viewer("http://127.0.0.1:8050")
