@@ -21,17 +21,18 @@ main <- function(data_path,save_path) {
     finally = {message("Data has been read successfully!")}
     
   )
-  # Make the data a tibble and omit NA rows
-  CAN_tibble <- CAN %>% as_tibble %>% na.omit;
+  
+  rem_cols = c("description", "tags", "video_error_or_removed", "comments_disabled", "ratings_disabled", "thumbnail_link")
+  # Make the data a tibble and omit NA rows and remove columns
+  CAN_tibble <- CAN %>% 
+    as_tibble %>% 
+    na.omit %>% 
+    select(-one_of(rem_cols))
 
   # Data type setting:
   # title, description, tags -> strings
   CAN_clean <- CAN_tibble %>% mutate(title = as.character(title),
                         channel_title = as.character(channel_title),
-                        description = as.character(description),
-                        tags = as.character(tags),
-                        thumbnail_link = as.character(thumbnail_link),
-                        
                         # change dates
                         trending_date = as.character(trending_date) %>% 
                           as.Date("%y.%d.%m"),
