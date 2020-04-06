@@ -1,8 +1,10 @@
 # Group 2
 [Project repo](https://github.com/STAT547-UBC-2019-20/group_2.git)
 
-
 Rachel Han & Marion Nyberg 
+
+## App 
+You can find the deployed app (here)[https://youtube-app-547.herokuapp.com].
 
 ## Dataset
 Our dataset is [Daily trending videos on YouTube](https://www.kaggle.com/datasnaek/youtube-new).
