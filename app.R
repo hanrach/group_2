@@ -21,7 +21,7 @@ app <- Dash$new()
 options(repr.plot.width = 10, repr.plot.height = 10)
 
 # load data
-CAN <- read.csv("data/youtube_processed.csv")
+CAN <- read.csv(url("https://raw.githubusercontent.com/hanrach/youtube_dataset/master/youtube_processed.csv"))
 
 #create categories df
 cat <- tibble(label = c("Entertainment", "News & Politics", "Comedy", "Music", "Sports", "Film & Animation","Howto & Style", "Gaming", "Science & Technology", "Education", "Travel & Events", "Pets & Animals", "Autos & Vehicles", "Shows", "Science & Technology", "Movies"),
@@ -322,8 +322,11 @@ app$callback(output = list(id = 'comments_scatterplot', property = 'figure'),
 						 	comments_scatter(category, likes_max, yaxis)
 						 })
 
+#app$run_server(debug=TRUE)
 
-app$run_server(debug=TRUE)
+# on Mac, app$run_server(debug=TRUE) does not run. 
+app$run_server(host = '0.0.0.0',debug=TRUE)
+#app$run_server('127.0.0.1', debug=TRUE)
 
 
 
