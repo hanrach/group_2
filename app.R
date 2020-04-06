@@ -21,7 +21,7 @@ app <- Dash$new()
 options(repr.plot.width = 10, repr.plot.height = 10)
 
 # load data
-CAN <- read.csv(url("https://raw.githubusercontent.com/hanrach/youtube_dataset/master/youtube_processed.csv"))
+CAN <- read.csv("data/youtube_processed.csv")
 
 #create categories df
 cat <- tibble(label = c("Entertainment", "News & Politics", "Comedy", "Music", "Sports", "Film & Animation","Howto & Style", "Gaming", "Science & Technology", "Education", "Travel & Events", "Pets & Animals", "Autos & Vehicles", "Shows", "Science & Technology", "Movies"),
