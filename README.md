@@ -4,7 +4,7 @@
 Rachel Han & Marion Nyberg 
 
 ## App 
-You can find the deployed app (here)[https://youtube-app-547.herokuapp.com].
+You can find the deployed app [here](https://youtube-app-547.herokuapp.com).
 
 ## Dataset
 Our dataset is [Daily trending videos on YouTube](https://www.kaggle.com/datasnaek/youtube-new).
