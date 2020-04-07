@@ -1,28 +1,26 @@
-# Group 2
+# Group 2: Exploring YouTube Statistics in Canada
 [Project repo](https://github.com/STAT547-UBC-2019-20/group_2.git)
 
 Rachel Han & Marion Nyberg 
 
-## App 
-You can find the deployed app [here](https://youtube-app-547.herokuapp.com).
 
 ## Dataset
 Our dataset is [Daily trending videos on YouTube](https://www.kaggle.com/datasnaek/youtube-new).
 
-Milestone 1:
-To produce knit `milestone1_547.Rmd`, run the following first:
+Preliminary exploratory data analysis:
+To produce, knit `milestone1_547.Rmd`, run the following first:
 - `make data/youtube_data.csv `
 - `make data/youtube_processed.csv`
 The knitted version can be found [here](https://stat547-ubc-2019-20.github.io/group_2_youtube/docs/milestone1_547.html).
 
-Milestone 2: See usage below.
-
-Milestone 3: See the usage below to create the final report. Note that the repository comes with clean directories (without data and images).
-
 Click [here](https://stat547-ubc-2019-20.github.io/group_2_youtube/docs/finalreport.html) for the final report.
+
+## Dashboard App 
+You can find our interactive app to visualize the data [here](https://youtube-app-547.herokuapp.com). 
 
 ## Usage
 
+To do the full data analysis and produce the report, follow the instructions below.
 ### Option 1
 
 1. Clone this repo: `git clone https://github.com/STAT547-UBC-2019-20/group_2_youtube`
@@ -94,7 +92,7 @@ Tests are written to make sure all the dependencies are loaded in. It's likely t
 
 - After all the steps, all the tests should pass.
 
-### Dashboard proposal
+## Dashboard proposal
 
 _Description:_ This app, titled “Canadian YouTube Statistics” will allow users to explore the relationships between YouTube video categories, view, comment and like/dislike counts. On the landing page there will be a bar chart that displays the number of videos per category. From a dropdown list, users will be able to filter a scatter plot by video category so that they are able to visualise the relationship between view count and likes/dislikes for their category of interest (e.g. within the video category ‘Music’). Likes and dislikes will be colour coded and regression lines showing the relationship between view number and likes and dislikes will be shown. Similarly, there will be another plot that allows users to filter video categories and explore the relationship between comment count and likes and dislikes for their category of interest. Again, likes and dislikes will be colour coded and there will be regression lines to show relationships between variables. There will also be 2 range slider options for both graphs that allows users to view relationships over a specific range of like/dislike counts. 
 
