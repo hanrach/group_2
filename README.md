@@ -7,14 +7,16 @@ Rachel Han & Marion Nyberg
 ## Dataset
 Our dataset is [Daily trending videos on YouTube](https://www.kaggle.com/datasnaek/youtube-new).
 
-Preliminary exploratory data analysis:
-To produce, knit `milestone1_547.Rmd`, run the following first:
-- `make data/youtube_data.csv `
-- `make data/youtube_processed.csv`
-The knitted version can be found [here](https://stat547-ubc-2019-20.github.io/group_2_youtube/docs/milestone1_547.html).
+Preliminary exploratory data analysis can be found [here](https://stat547-ubc-2019-20.github.io/group_2_youtube/docs/milestone1_547.html).
 
 Click [here](https://stat547-ubc-2019-20.github.io/group_2_youtube/docs/finalreport.html) for the final report.
 
+To knit the documents above in `R`, run the following commands in order first:
+
+```
+make data/youtube_data.csv
+make data/youtube_processed.csv
+```
 ## Dashboard App 
 You can find our interactive app to visualize the data [here](https://youtube-app-547.herokuapp.com). 
 
@@ -101,3 +103,5 @@ _Usage:_ Mary is a psychologist who is trying to understand how certain personal
 ![Dashboard draft sketch](dashdraft.png)
 
 Link to [Draft app](app.R)
+
+*The proposal has been implemented, see Dashboard App above.*
